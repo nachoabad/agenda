@@ -1,0 +1,12 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: 0
+  date: <%= Date.yesterday.prev_occurring(:monday) %>
+  user: user1
+  slot_rule: one
+
+# two:
+#   status: 1
+#   user: two
+#   slot_rule: two

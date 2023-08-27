@@ -1,0 +1,22 @@
+<div id="<%= dom_id slot_rule %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Time:</strong>
+    <%= slot_rule.time %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">wday:</strong>
+    <%= slot_rule.wday %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">User:</strong>
+    <%= slot_rule.user_id %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this slot rule", slot_rule, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this slot rule', edit_slot_rule_path(slot_rule), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

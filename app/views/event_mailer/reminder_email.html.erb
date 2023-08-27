@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2>Recordatorio Cita <%= @event.service.name %></h2>
+    <p>
+      <%= @event.user.name.titleize %>
+    </p>
+    <p>
+      Fecha: <%= l @event.user_date_time(@event.user).to_date %>
+    </p>
+    <p>
+      Hora: <%= @event.user_date_time(@event.user).strftime('%l:%M%P') %> <%= @event.user.time_zone %>
+    </p>
+  </body>
+</html>

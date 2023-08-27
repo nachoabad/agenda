@@ -1,0 +1,6 @@
+<div id="<%= dom_id service %>" class="mt-8">
+  <% if action_name != "show" %>
+    <%= link_to "Ver citas #{service.name}", service_slots_path(service), class: "mt-2 rounded-lg py-3 px-5 bg-blue-600 text-white font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

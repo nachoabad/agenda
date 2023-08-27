@@ -1,0 +1,27 @@
+<div id="<%= dom_id event %>" class="text-center">
+  <p class="my-2">
+    <strong class="block font-medium mb-1"><%= event.service.name %></strong> 
+  </p>
+
+  <p class="my-2">
+    <strong class="block font-medium mb-1">
+      <%= event.blocked? ? "Cita bloqueada".upcase : event.user.name.titleize %>
+    </strong> 
+  </p>
+
+  <p class="my-2">
+    <strong class="block font-medium mb-1"><%= l event.user_date_time(current_user).to_date %></strong>
+  </p>
+
+  <p class="my-2">
+    <strong class="block font-medium mb-1">Hora: <%= event.user_date_time(current_user).strftime('%l:%M%P') %> <%= current_user.time_zone %></strong>
+  </p>
+
+  <% if action_name == "index" %>
+    <%= button_to event.blocked? ? 'Desbloquear esta cita' : 'Cancelar esta cita',
+      event_path(event),
+      method: :delete,
+      class: "mt-2 rounded-lg py-3 px-5 bg-red-200 font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

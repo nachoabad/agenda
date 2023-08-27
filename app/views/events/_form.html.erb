@@ -1,0 +1,25 @@
+<%= form_with(model: event, url: [@service, event], class: "contents") do |form| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+        <% event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :slot_rule_id %>
+  <%= form.hidden_field :date %>
+  
+  <div class="inline">
+    <% if @current_user.owns?(@service) %>
+      <%= form.hidden_field :status, value: "blocked" %>
+      <%= form.submit "Bloquear esta cita", class: "w-full rounded-lg mt-3 py-3 px-5 bg-red-100 text-black inline-block font-medium cursor-pointer" %>
+    <% else %>
+      <%= form.submit "Reservar cita", class: "w-full rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <% end %>
+  </div>
+<% end %>

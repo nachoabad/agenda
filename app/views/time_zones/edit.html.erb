@@ -1,0 +1,19 @@
+<div class="mx-auto md:w-1/4 text-center w-full">
+  <h1 class="font-bold text-2xl">Selecciona tu zona horaria</h1>
+
+  <%= form_with(url: time_zone_path, class: "contents", method: :patch) do |form| %>
+    <div class="my-5">
+      <%= form.time_zone_select(
+        :time_zone,
+        nil,
+        {include_blank: true, default: ActiveSupport::TimeZone[current_user.time_zone]},
+        {class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: true}
+      ) %>
+    </div>
+    <div class="inline">
+      <%= form.submit "Guardar", class: "w-full my-5 rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    </div>
+  <% end %>
+
+  <%= link_to 'Regresar', service_slots_path(@service), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+</div>

@@ -1,0 +1,11 @@
+admin1: 
+  name: "Admin 1"
+  email: admin1@mail.com
+  encrypted_password: <%= User.new.send(:password_digest, 'adminadmin') %>
+  time_zone: Madrid
+
+user1: 
+  name: "User 1"
+  email: user1@mail.com
+  encrypted_password: <%= User.new.send(:password_digest, 'useruser') %>
+  time_zone: Caracas
