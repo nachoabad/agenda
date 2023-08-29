@@ -19,6 +19,7 @@ es:
         name: Nombre y Apellido
         password: Clave
         password_confirmation: Confirmación de la clave
+        phone: Teléfono
         remember_created_at: Fecha de 'Recordarme'
         remember_me: Recordarme
         reset_password_sent_at: Fecha de envío de código para clave

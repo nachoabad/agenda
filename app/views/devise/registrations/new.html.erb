@@ -28,6 +28,12 @@
     </div>
 
     <div class="my-5">
+      <%= f.label :phone %>
+      <em>(Incluir código internacional)</em><br />
+      <%= f.text_field :phone, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: true %>
+    </div>
+
+    <div class="my-5">
       <%= f.label :time_zone %><br />
       <%= f.time_zone_select(
         :time_zone,

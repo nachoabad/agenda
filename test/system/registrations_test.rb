@@ -16,6 +16,7 @@ class RegistrationsTest < ApplicationSystemTestCase
     fill_in "Clave", with: 123456
     fill_in "Confirmación de la clave", with: 123456
     fill_in "Nombre y Apellido", with: "New User"
+    fill_in "Teléfono", with: "+34123456789"
     select "(GMT+01:00) Madrid", from: "Zona horario" 
     click_on "Registrarse"
 

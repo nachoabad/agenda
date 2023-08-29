@@ -7,7 +7,12 @@
 
   <p class="my-2">
     <strong class="block font-medium mb-1">
-      <%= event.blocked? ? "Cita bloqueada".upcase : (event.user.name.titleize + " / " + event.user.email) %>
+      <% if event.blocked? %>
+        <%= "Cita bloqueada".upcase %>
+      <% else %>
+        <%= event.user.name.titleize %></br>
+        <%= event.user.email + " " + event.user.phone.to_s %>
+      <% end %>
     </strong> 
   </p>
 
