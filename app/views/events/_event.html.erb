@@ -1,7 +1,9 @@
 <div id="<%= dom_id event %>" class="text-center">
-  <p class="my-2">
-    <strong class="block font-medium mb-1"><%= event.service.name %></strong> 
-  </p>
+  <% unless current_user.owns?(event.service) %>
+    <p class="my-2">
+      <strong class="block font-medium mb-1"><%= event.service.name %></strong>
+    </p>
+  <% end %>
 
   <p class="my-2">
     <strong class="block font-medium mb-1">
