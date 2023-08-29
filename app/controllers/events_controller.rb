@@ -10,7 +10,7 @@ class EventsController < ApplicationController
       current_user.events
     end
 
-    @events = events.booked.where(date: Date.today..).order(:date)
+    @events = events.includes(:slot_rule).booked.where(date: Date.today..).order(:date, "slot_rules.time")
   end
 
   def show
