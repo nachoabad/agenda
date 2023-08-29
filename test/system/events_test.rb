@@ -25,6 +25,7 @@ class EventsTest < ApplicationSystemTestCase
     assert_text "3:00am"
 
     click_on "Cancelar esta cita"
+    page.driver.browser.switch_to.alert.accept
     assert_text "Cita anulada éxitosamente"
     assert_text "3:00am"
 
@@ -69,6 +70,7 @@ class EventsTest < ApplicationSystemTestCase
     assert_text users(:user1).name
 
     click_on "Cancelar esta cita"
+    page.driver.browser.switch_to.alert.accept
     assert_text "Cita anulada éxitosamente"
 
     assert page.has_css?('.bg-gray-100', text: "8:00am")

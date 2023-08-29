@@ -28,6 +28,7 @@
     <%= button_to event.blocked? ? 'Desbloquear esta cita' : 'Cancelar esta cita',
       event_path(event),
       method: :delete,
+      form: { data: { turbo_confirm: "¿Confirmas que deseas proceder?" } },
       class: "mt-2 rounded-lg py-3 px-5 bg-red-200 font-medium" %>
     <hr class="mt-6">
   <% end %>
