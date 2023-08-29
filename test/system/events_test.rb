@@ -107,8 +107,13 @@ class EventsTest < ApplicationSystemTestCase
     sign_in users(:admin1)
 
     click_on "Mis citas"
+    assert_no_text "CITA BLOQUEADA"
+    click_on "Regresar"
+
+    click_on "8:00am"
     assert_text "CITA BLOQUEADA"
     click_on "Desbloquear esta cita"
+    page.driver.browser.switch_to.alert.accept
     assert_text "Cita desbloqueada éxitosamente"
 
     assert page.has_css?('.bg-gray-100', text: "8:00am")

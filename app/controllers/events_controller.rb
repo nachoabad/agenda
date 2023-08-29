@@ -10,7 +10,7 @@ class EventsController < ApplicationController
       current_user.events
     end
 
-    @events = events.where(date: Date.today..).order(:date)
+    @events = events.booked.where(date: Date.today..).order(:date)
   end
 
   def show
