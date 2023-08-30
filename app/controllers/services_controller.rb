@@ -5,4 +5,9 @@ class ServicesController < ApplicationController
     @services = current_user.services
     @services = Service.all unless @services.any?
   end
+
+  def show
+    service = Service.find_by slug: params[:id]
+    redirect_to service_slots_path(service)
+  end
 end

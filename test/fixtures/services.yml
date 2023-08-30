@@ -4,3 +4,4 @@ one:
   name: "Service Admin 1"
   time_zone: Madrid
   user: admin1
+  slug: "service1_slug"

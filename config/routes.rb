@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     resources :slot_rules
   end
 
-  resource  :time_zone
+  resource :time_zone
+
+  get '/:id', to: 'services#show'
 
   root 'services#index'
 end
