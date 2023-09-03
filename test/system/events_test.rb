@@ -15,7 +15,7 @@ class EventsTest < ApplicationSystemTestCase
     click_on "3:00am"
     assert_text "3:00am"
     
-    click_on "Reservar cita"
+    click_on "Reservar esta cita"
     assert_text "Cita creada éxitosamente"
 
     click_on "Regresar"
@@ -49,7 +49,7 @@ class EventsTest < ApplicationSystemTestCase
     click_on "3:00am"
     assert_text "3:00am"
     
-    click_on "Reservar cita"
+    click_on "Reservar esta cita"
     assert_text "Cita creada éxitosamente"
 
     click_on "Regresar"
@@ -62,7 +62,7 @@ class EventsTest < ApplicationSystemTestCase
     sign_in users(:admin1)
     visit service_slots_path(@service)
 
-    assert page.has_css?('.bg-green-50', text: "8:00am")
+    assert page.has_css?('.bg-green-100', text: "8:00am")
     assert page.has_css?('.bg-gray-100', text: "3:00pm")
 
     click_on "Mis citas"
@@ -96,7 +96,7 @@ class EventsTest < ApplicationSystemTestCase
     assert_text "Cita bloqueada éxitosamente"
     click_on "Regresar"
 
-    assert page.has_css?('.bg-red-50', text: "8:00am")
+    assert page.has_css?('.bg-red-100', text: "8:00am")
     assert page.has_css?('.bg-gray-100', text: "3:00pm")
 
     sign_out(:admin1)

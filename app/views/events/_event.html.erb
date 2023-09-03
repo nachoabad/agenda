@@ -1,7 +1,7 @@
 <div id="<%= dom_id event %>" class="text-center">
   <% unless current_user.owns?(event.service) %>
     <p class="my-2">
-      <strong class="block font-medium mb-1"><%= event.service.name %></strong>
+      <strong class="block font-large mb-1"><%= event.service.name %></strong>
     </p>
   <% end %>
 
@@ -25,11 +25,26 @@
   </p>
 
   <% if action_name == "index" %>
+    <div class="flex flex-col items-center">
+    <% if current_user.owns?(event.service) %>
+      <%  if event.payment.reported? %>
+        <%= link_to 'Confirmar pago', edit_payment_path(event.payment), class: "bg-green-100 mt-3 rounded-lg py-3 px-5 font-medium" %>
+      <% else %>
+        <%= link_to 'Pago pendiente', edit_payment_path(event.payment),
+          class: "mt-3 rounded-lg py-3 px-5 bg-yellow-100 font-medium" if event.past? && !event&.payment&.confirmed? %>
+      <% end %>
+    <% else %>
+      <%= link_to 'Reportar pago',
+        edit_payment_path(event.payment),
+        class: "mt-3 rounded-lg py-3 px-5 bg-green-100 font-medium" if event.payment.pending? %>
+    <% end %>
     <%= button_to event.blocked? ? 'Desbloquear esta cita' : 'Cancelar esta cita',
       event_path(event),
       method: :delete,
       form: { data: { turbo_confirm: "¿Confirmas que deseas proceder?" } },
-      class: "mt-2 rounded-lg py-3 px-5 bg-red-200 font-medium" %>
-    <hr class="mt-6">
+      class: "mt-3 rounded-lg py-3 px-5 bg-red-100 font-medium" unless event.past?
+    %>
+    </div>
+    <hr class="my-6">
   <% end %>
 </div>

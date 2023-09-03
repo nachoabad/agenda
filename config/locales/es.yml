@@ -2,6 +2,10 @@
 es:
   activerecord:
     attributes:
+      payment:
+        amount: Monto
+        date: Fecha de pago
+        reference: Referencia de pago
       user:
         confirmation_sent_at: Confirmación enviada a
         confirmation_token: Código de confirmación

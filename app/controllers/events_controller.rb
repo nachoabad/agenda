@@ -4,13 +4,15 @@ class EventsController < ApplicationController
   before_action :set_service, only: %i[ index new ]
 
   def index
-    events = if current_user.owns? @service
-      @service.events
+    if current_user.owns? @service
+      events = @service.events.booked.where(date: Date.today..)
     else
-      current_user.events
+      events = current_user.events.includes(:payment).booked.where(date: Date.today..)
+           .or(current_user.events.includes(:payment).where('payments.status' => 'pending')
+           .booked.where(date: ...Date.yesterday))
     end
 
-    @events = events.includes(:slot_rule).booked.where(date: Date.today..).order(:date, "slot_rules.time")
+    @events = events.includes(:slot_rule).order(:date, "slot_rules.time")
   end
 
   def show
@@ -52,9 +54,13 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event.destroy
-    notice = @event.blocked? ? "Cita desbloqueada éxitosamente" : "Cita anulada éxitosamente"
-    redirect_to service_slots_url(@event.service), notice:
+    if @event.past?
+      redirect_to service_slots_url(@event.service), alert: "Citas pasadas no pueden ser modificadas"
+    else
+      @event.destroy
+      notice = @event.blocked? ? "Cita desbloqueada éxitosamente" : "Cita anulada éxitosamente"
+      redirect_to service_slots_url(@event.service), notice:
+    end
   end
 
   private

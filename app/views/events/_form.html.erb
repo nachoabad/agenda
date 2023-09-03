@@ -17,9 +17,9 @@
   <div class="inline">
     <% if @current_user.owns?(@service) %>
       <%= form.hidden_field :status, value: "blocked" %>
-      <%= form.submit "Bloquear esta cita", class: "w-full rounded-lg mt-3 py-3 px-5 bg-red-100 text-black inline-block font-medium cursor-pointer" %>
+      <%= form.submit "Bloquear esta cita", class: "rounded-lg mt-3 py-3 px-5 bg-red-100 text-black inline-block font-medium cursor-pointer" %>
     <% else %>
-      <%= form.submit "Reservar cita", class: "w-full rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      <%= form.submit "Reservar esta cita", class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
     <% end %>
   </div>
 <% end %>

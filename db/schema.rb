@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_30_222929) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_01_211032) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_222929) do
     t.datetime "updated_at", null: false
     t.index ["slot_rule_id"], name: "index_events_on_slot_rule_id"
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "status", default: 0
+    t.date "date"
+    t.decimal "amount"
+    t.string "reference"
+    t.text "comments"
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_payments_on_event_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -63,6 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_222929) do
 
   add_foreign_key "events", "slot_rules"
   add_foreign_key "events", "users"
+  add_foreign_key "payments", "events"
   add_foreign_key "services", "users"
   add_foreign_key "slot_rules", "services"
 end

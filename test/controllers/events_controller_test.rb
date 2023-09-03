@@ -44,7 +44,17 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   #   assert_redirected_to event_url(@event)
   # end
 
-  test "should destroy event" do
+  test "should not destroy a past event" do
+    assert_difference("Event.count", 0) do
+      delete event_url(@event)
+    end
+
+    assert_redirected_to service_slots_url(@service)
+  end
+
+  test "should destroy future event" do
+    @event.update date: @event.date + 7.days
+
     assert_difference("Event.count", -1) do
       delete event_url(@event)
     end

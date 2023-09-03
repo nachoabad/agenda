@@ -1,6 +1,6 @@
 <% if slot.event %>
   <%= link_to slot.time, event_path(slot.event), 
-    class: "rounded-lg mt-1 py-3 px-5 bg-#{slot.event.blocked? ? "red" : "green"}-50 inline-block font-medium" %>
+    class: "rounded-lg mt-1 py-3 px-5 bg-#{slot_color(slot.event)}-100 inline-block font-medium" %>
 <% else %>
   <%= link_to slot.time, new_service_event_path(
       @service,

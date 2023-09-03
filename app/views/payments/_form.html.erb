@@ -1,0 +1,48 @@
+<%= form_with(model: payment, class: "contents") do |form| %>
+  <% if payment.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+
+      <ul>
+        <% payment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="flex flex-col justify-center items-center">
+  <div class="my-3">
+    <%= form.label :date %>
+    <%= form.date_field :date, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-1",
+    required: true, disabled: payment.confirmed? %>
+  </div>
+
+  <div class="my-2">
+    <%= form.label :amount %>
+    <%= form.text_field :amount, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-1",
+    required: true, disabled: payment.confirmed? %>
+  </div>
+
+  <div class="my-2">
+    <%= form.label :reference %>
+    <%= form.text_field :reference, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-1",
+    required: true, disabled: payment.confirmed? %>
+  </div>
+
+  <!-- <div class="my-3">
+    <%= form.label :comments %>
+    <%= form.text_area :comments, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div> -->
+
+  <div class="inline mt-5">
+    <% if @current_user.owns?(payment.event.service) %>
+      <%= form.hidden_field :status, value: "confirmed" %>
+      <%= form.submit "Confirmar pago", class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <% else %>
+      <%= form.hidden_field :status, value: "reported" %>
+      <%= form.submit "Reportar pago", class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <% end %>
+  </div>
+  </div>
+<% end %>

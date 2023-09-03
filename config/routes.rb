@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users, :controllers => {
     registrations: 'registrations'
   }
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
     resources :slot_rules
   end
 
+  resources :payments, only: %i[index edit update]
   resource :time_zone
 
   get '/:id', to: 'services#show'
