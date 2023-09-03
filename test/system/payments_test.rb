@@ -17,6 +17,7 @@ class PaymentsTest < ApplicationSystemTestCase
 
     fill_in "Fecha de pago", with: "30/01/2023"
     fill_in "Monto", with: "50"
+    select "bs", from: "payment[currency]"
     fill_in "Referencia de pago", with: "Zelle 123"
     click_on "Reportar pago"
 
@@ -34,6 +35,7 @@ class PaymentsTest < ApplicationSystemTestCase
 
     fill_in "Fecha de pago", with: "30/01/2023"
     fill_in "Monto", with: "50"
+    select "bs", from: "payment[currency]"
     fill_in "Referencia de pago", with: "Zelle 123"
     click_on "Reportar pago"
 
@@ -56,6 +58,7 @@ class PaymentsTest < ApplicationSystemTestCase
 
     fill_in "Fecha de pago", with: "30/01/2023"
     fill_in "Monto", with: "50"
+    select "bs", from: "payment[currency]"
     fill_in "Referencia de pago", with: "Zelle 123"
     click_on "Confirmar pago"
 

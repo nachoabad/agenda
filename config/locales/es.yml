@@ -4,6 +4,7 @@ es:
     attributes:
       payment:
         amount: Monto
+        currency: Divisa de pago
         date: Fecha de pago
         reference: Referencia de pago
       user:
