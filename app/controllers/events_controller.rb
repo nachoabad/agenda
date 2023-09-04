@@ -34,6 +34,7 @@ class EventsController < ApplicationController
     @event = current_user.events.new(event_params)
 
     if @event.save
+      EventMailer.with(event: @event).created_email.deliver_later if @event.booked?
       notice = @event.blocked? ? "Cita bloqueada éxitosamente" : "Cita creada éxitosamente"
       redirect_to event_url(@event), notice:
     else

@@ -11,4 +11,16 @@ class EventMailer < ApplicationMailer
       subject: "Recordatorio Cita #{@event.service.name}"
     )
   end
+
+  # EventMailer.with(event: event).created_email.deliver_later
+  def created_email
+    @event = params[:event]
+
+    mail(
+      to: @event.service.user.email,
+      from: email_address_with_name('info@decktra.com', @event.user.name.titleize),
+      reply_to: @event.user.email,
+      subject: "!Nueva cita #{I18n.l @event.user_date_time(@event.service.user), format: :short}!"
+    )
+  end
 end

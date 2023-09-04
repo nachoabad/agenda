@@ -1,0 +1,8 @@
+Nueva Cita <%= @event.service.name %>
+===============================================
+
+<%= @event.user.name.titleize %>
+
+Fecha: <%= l @event.user_date_time(@event.service.user).to_date %>
+
+Hora: <%= @event.user_date_time(@event.service.user).strftime('%l:%M%P') %> <%= @event.service.user.time_zone %>
