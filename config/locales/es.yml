@@ -2,6 +2,10 @@
 es:
   activerecord:
     attributes:
+      event_rule:
+        recurrences:
+          weekly: "Semanal"
+          biweekly: "Quincenal"
       payment:
         amount: Monto
         currency: Divisa de pago

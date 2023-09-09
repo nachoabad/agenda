@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :slot_rules
   end
 
+  resources :event_rules
   resources :payments, only: %i[index edit update]
   resource :time_zone
 

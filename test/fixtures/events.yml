@@ -6,7 +6,3 @@ one:
   user: user1
   slot_rule: one
 
-# two:
-#   status: 1
-#   user: two
-#   slot_rule: two

@@ -4,6 +4,8 @@ class EventsController < ApplicationController
   before_action :set_service, only: %i[ index new ]
 
   def index
+    @page = params[:page].to_i.abs
+
     if current_user.owns? @service
       events = @service.events.booked.where(date: Date.today..)
     else
@@ -12,7 +14,7 @@ class EventsController < ApplicationController
            .booked.where(date: ...Date.yesterday))
     end
 
-    @events = events.includes(:slot_rule).order(:date, "slot_rules.time")
+    @events = events.includes(:slot_rule).order(:date, "slot_rules.time").limit(10).offset(10*(@page))
   end
 
   def show
@@ -34,8 +36,15 @@ class EventsController < ApplicationController
     @event = current_user.events.new(event_params)
 
     if @event.save
+      if params[:event][:recurrence]
+        @event_rule = current_user.event_rules.create!(event_rule_params)
+        @event_rule.create_events_from(@event)
+
+        notice = "Cita #{t('activerecord.attributes.event_rule.recurrences.' + @event_rule&.recurrence)} creada éxitosamente"
+      end
+      notice ||= @event.blocked? ? "Cita bloqueada éxitosamente" : "Cita creada éxitosamente"
+
       EventMailer.with(event: @event).created_email.deliver_later if @event.booked?
-      notice = @event.blocked? ? "Cita bloqueada éxitosamente" : "Cita creada éxitosamente"
       redirect_to event_url(@event), notice:
     else
       render :new, status: :unprocessable_entity
@@ -59,13 +68,25 @@ class EventsController < ApplicationController
       redirect_to service_slots_url(@event.service), alert: "Citas pasadas no pueden ser modificadas"
     else
       @event.destroy
-      notice = @event.blocked? ? "Cita desbloqueada éxitosamente" : "Cita anulada éxitosamente"
+
+      if event_rule_id = params[:destroy_event_rule]
+        event_rule = EventRule.find(event_rule_id)
+        if current_user == event_rule.user || current_user == event_rule.service.user
+          event_rule.destroy
+          Event.where(slot_rule: @event.slot_rule, user: @event.user, date: @event.date..).destroy_all
+
+          notice = "Citas recurrentes anuladas éxitosamente"
+        end
+      else
+        notice = @event.blocked? ? "Cita desbloqueada éxitosamente" : "Cita anulada éxitosamente"
+      end
+
       redirect_to service_slots_url(@event.service), notice:
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_event
       @event = Event.find(params[:id])
       redirect_to service_slots_path(event.service) unless current_user == @event.user ||
@@ -77,8 +98,11 @@ class EventsController < ApplicationController
       session[:service_id] = @service.id
     end
 
-    # Only allow a list of trusted parameters through.
     def event_params
       params.require(:event).permit(:status, :slot_rule_id, :date)
+    end
+
+    def event_rule_params
+      params.require(:event).permit(:slot_rule_id, :date, :recurrence)
     end
 end

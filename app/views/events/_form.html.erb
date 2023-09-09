@@ -23,3 +23,18 @@
     <% end %>
   </div>
 <% end %>
+
+<% if @service.accepts_event_rules && !@current_user.owns?(@service) %>
+  <hr class="mt-5">
+  <p class="my-3">
+    <strong class="block font-large mb-1">¿Deseas reservar este horario recurrentemente?</strong>
+  </p>
+  <%= button_to "Reservar este horario semanal",
+    service_events_path,
+    params: { event: { slot_rule_id: event.slot_rule_id, date: event.date, recurrence: :weekly } },
+    class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  <%= button_to "Reservar este horario quincenal",
+    service_events_path,
+    params: { event: { slot_rule_id: event.slot_rule_id, date: event.date, recurrence: :biweekly } },
+    class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+<% end %>

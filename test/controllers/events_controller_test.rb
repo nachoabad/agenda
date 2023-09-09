@@ -17,8 +17,8 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create event" do
-    assert_difference("Event.count") do
+  test "should create an event" do
+    assert_difference("Event.count", 1) do
       post service_events_url(@service), params: { event: { 
         slot_rule_id: slot_rules(:one).id,
         status: "booked",
@@ -29,20 +29,32 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to event_url(Event.last)
   end
 
+  test "should create recurrent events" do
+    assert_difference("Event.count", 11) do
+      post service_events_url(@service), params: { event: {
+        slot_rule_id: slot_rules(:one).id,
+        status: "booked",
+        date: Date.today.next_occurring(:monday),
+        recurrence: :biweekly
+      } }
+    end
+  end
+
+  test "should create event rule" do
+    assert_difference("EventRule.count", 1) do
+      post service_events_url(@service), params: { event: {
+        slot_rule_id: slot_rules(:one).id,
+        status: "booked",
+        date: Date.today.next_occurring(:monday),
+        recurrence: :biweekly
+      } }
+    end
+  end
+
   test "should show event" do
     get event_url(@event)
     assert_response :success
   end
-
-  # test "should get edit" do
-  #   get edit_event_url(@event)
-  #   assert_response :success
-  # end
-
-  # test "should update event" do
-  #   patch event_url(@event), params: { event: { slot_rule_id: @event.slot_rule_id, status: @event.status, user_id: @event.user_id } }
-  #   assert_redirected_to event_url(@event)
-  # end
 
   test "should not destroy a past event" do
     assert_difference("Event.count", 0) do
@@ -53,12 +65,25 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy future event" do
-    @event.update date: @event.date + 7.days
+    @event.update date: @event.date + 14.days
 
     assert_difference("Event.count", -1) do
       delete event_url(@event)
     end
 
     assert_redirected_to service_slots_url(@service)
+  end
+
+  test "should destroy next recurrent events" do
+    post service_events_url(@service), params: { event: {
+      slot_rule_id: slot_rules(:one).id,
+      status: "booked",
+      date: Date.today.next_occurring(:monday),
+      recurrence: :biweekly
+    } }
+
+    assert_difference("Event.count", -5) do
+      delete event_url(Event.last(5).first, params: { destroy_event_rule: EventRule.last.id })
+    end
   end
 end

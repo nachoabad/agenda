@@ -13,10 +13,21 @@
     <% end %>
   <% end %>
 
-  <%= button_to event.blocked? ? 'Desbloquear esta cita' : 'Cancelar esta cita',
-      event_path(event), method: :delete,
-      form: { data: { turbo_confirm: "¿Confirmas que deseas proceder?" } },
-      class: "mt-3 rounded-lg py-3 px-5 bg-red-100 font-medium" unless event.past? %>
+  <% unless event.past? %>
+    <%= button_to event.blocked? ? 'Desbloquear esta cita' : 'Cancelar esta cita',
+        event_path(event), method: :delete,
+        form: { data: { turbo_confirm: "¿Confirmas que deseas proceder?" } },
+        class: "mt-3 rounded-lg py-3 px-5 bg-red-100 font-medium" %>
+
+    <% if event.service.accepts_event_rules &&
+          event_rule = event.slot_rule.event_rules.find_by(user: event.user) %>
+      <%= button_to 'Cancelar cita recurrente',
+          event_path(event), method: :delete,
+          params: { destroy_event_rule: event_rule.id },
+          form: { data: { turbo_confirm: "¿Confirmas que deseas proceder?" } },
+          class: "mt-3 rounded-lg py-3 px-5 bg-red-100 font-medium" %>
+    <% end %>
+  <% end %>
 </div>
 
 

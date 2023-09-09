@@ -1,6 +1,7 @@
 class SlotRule < ApplicationRecord
   belongs_to :service
   has_many :events
+  has_many :event_rules
 
   enum status: { active: 0, inactive: 1 }
 
