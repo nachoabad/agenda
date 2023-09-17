@@ -121,4 +121,39 @@ class EventsTest < ApplicationSystemTestCase
     assert page.has_css?('.bg-gray-100', text: "8:00am")
     assert page.has_css?('.bg-gray-100', text: "3:00pm")
   end
+
+  test "admin can create an event with no user" do
+    # standard time
+    travel_to Time.new(Time.current.year, 12, 01, 01, 04, 44)
+    sign_in users(:admin1)
+    visit service_slots_path(@service)
+
+    click_on "8:00am"
+    click_on "Crear cita"
+    fill_in "Nombre y Apellido", with: "User on event name"
+    click_on "Crear cita"
+
+    assert_text "Cita creada éxitosamente"
+    assert_text "User On Event Name"
+  end
+
+  test "admin can create an event registering a new user" do
+    # standard time
+    travel_to Time.new(Time.current.year, 12, 01, 01, 04, 44)
+    sign_in users(:admin1)
+    visit service_slots_path(@service)
+
+    click_on "8:00am"
+    click_on "Crear cita"
+    fill_in "Email", with: "new_user@mail.com"
+    fill_in "Nombre y Apellido", with: "New User"
+    fill_in "Teléfono", with: "+34123456789"
+    select "(GMT+01:00) Madrid", from: "Zona horario"
+    click_on "Crear cita"
+
+    assert_text "Cita creada éxitosamente"
+    assert_text "New User"
+    assert_text "new_user@mail.com"
+    assert_text "+34123456789"
+  end
 end

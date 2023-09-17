@@ -33,7 +33,13 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = current_user.events.new(event_params)
+    if params.dig(:event, :user_attributes, :email).presence
+      @event = Event.new(user_event_params)
+      @event.user.password = @event.user.password_confirmation = SecureRandom.hex(6)
+    else
+      @event = current_user.events.new(event_params)
+      @event.name = params.dig(:event, :user_attributes, :name)
+    end
 
     if @event.save
       if params[:event][:recurrence]
@@ -100,6 +106,10 @@ class EventsController < ApplicationController
 
     def event_params
       params.require(:event).permit(:status, :slot_rule_id, :date)
+    end
+
+    def user_event_params
+      params.require(:event).permit(:status, :slot_rule_id, :date, user_attributes: [:name, :email, :phone, :time_zone])
     end
 
     def event_rule_params

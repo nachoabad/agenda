@@ -10,8 +10,12 @@
       <% if event.blocked? %>
         <%= "Cita bloqueada".upcase %>
       <% else %>
-        <%= event.user.name.titleize %></br>
-        <%= event.user.email + " " + event.user.phone.to_s %>
+        <% if event.name %>
+          <%= event.name.titleize %>
+        <% else %>
+          <%= event.user.name.titleize %></br>
+          <%= event.user.email + " " + event.user.phone.to_s %>
+        <% end %>
       <% end %>
     </strong> 
   </p>

@@ -1,12 +1,14 @@
 class Event < ApplicationRecord
   after_create :create_pending_payment
 
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :slot_rule
 
   has_one :payment, dependent: :destroy
 
   enum status: { booked: 0, blocked: 1 }
+
+  accepts_nested_attributes_for :user
 
   validates :slot_rule_id, uniqueness: { scope: :date, message: "Fecha/hora no disponible" }
 

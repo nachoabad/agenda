@@ -1,28 +1,77 @@
-<%= form_with(model: event, url: [@service, event], class: "contents") do |form| %>
-  <% if event.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+<div class="inline">
+  <% if @current_user.owns?(@service) %>
+    <%= button_to "Bloquear esta cita",
+      service_events_path,
+      params: { event: { slot_rule_id: event.slot_rule_id, date: event.date, status: :blocked } },
+      class: "rounded-lg mt-3 py-3 px-5 bg-red-100 text-black inline-block font-medium cursor-pointer" %>
+    
+    <div data-controller="visibility">
+      <div data-visibility-target="hideable">
+        <button data-action="visibility#showTargets" class="rounded-lg mt-3 py-3 px-5 bg-green-100 text-black inline-block font-medium cursor-pointer">Crear cita</button>
+      </div>
+      
+      <div data-visibility-target="showable" hidden>
+        <%= form_with(
+            model: Event.new(user: User.new(time_zone: @current_user.time_zone)),
+            url: [@service, event],
+            class: "contents") do |form| %>
+          <% if event.errors.any? %>
+            <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+              <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
-      <ul>
-        <% event.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+              <ul>
+                <% event.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <%= form.hidden_field :slot_rule_id, value: event.slot_rule.id %>
+          <%= form.hidden_field :date, value: event.date %>
+
+          <%= form.fields_for :user do |f| %>
+
+            <div class="my-5">
+              <%= f.label :name %><br />
+              <%= f.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: true %>
+            </div>
+
+            <div class="my-5">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+            </div>
+
+            <div class="my-5">
+              <%= f.label :phone %>
+              <em>(Incluir código internacional)</em><br />
+              <%= f.text_field :phone, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+            </div>
+
+            <div class="my-5">
+              <%= f.label :time_zone %><br />
+              <%= f.time_zone_select(
+                :time_zone,
+                nil,
+                { include_blank: true },
+                { class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" }
+              ) %>
+            </div>
+          <% end %>
+
+          <div class="inline">
+            <%= form.submit "Crear cita", class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+          </div>
         <% end %>
-      </ul>
+      </div>
     </div>
+  <% else %>
+    <%= button_to "Reservar esta cita",
+      service_events_path,
+      params: { event: { slot_rule_id: event.slot_rule_id, date: event.date } },
+      class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   <% end %>
-
-  <%= form.hidden_field :slot_rule_id %>
-  <%= form.hidden_field :date %>
-  
-  <div class="inline">
-    <% if @current_user.owns?(@service) %>
-      <%= form.hidden_field :status, value: "blocked" %>
-      <%= form.submit "Bloquear esta cita", class: "rounded-lg mt-3 py-3 px-5 bg-red-100 text-black inline-block font-medium cursor-pointer" %>
-    <% else %>
-      <%= form.submit "Reservar esta cita", class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-    <% end %>
-  </div>
-<% end %>
+</div>
 
 <% if @service.accepts_event_rules && !@current_user.owns?(@service) %>
   <hr class="mt-5">
