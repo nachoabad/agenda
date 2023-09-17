@@ -33,9 +33,15 @@ class EventsController < ApplicationController
   end
 
   def create
+    # TODO: tidy up fat controller!
     if params.dig(:event, :user_attributes, :email).presence
       @event = Event.new(user_event_params)
-      @event.user.password = @event.user.password_confirmation = SecureRandom.hex(6)
+
+      if user = User.find_by(email: params.dig(:event, :user_attributes, :email))
+        @event.user = user
+      else
+        @event.user.password = @event.user.password_confirmation = SecureRandom.hex(6)
+      end
     else
       @event = current_user.events.new(event_params)
       @event.name = params.dig(:event, :user_attributes, :name)

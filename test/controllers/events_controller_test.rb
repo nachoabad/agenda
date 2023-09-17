@@ -4,7 +4,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @service = services(:one)
     @event   = events(:one)
-    sign_in users(:user1)
+    sign_in users(:admin1)
   end
 
   test "should get index" do
@@ -37,6 +37,21 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
           status: "booked",
           date: Date.today.next_occurring(:monday),
           user_attributes: { name: "Graciela", email: "gra@cie.la", phone: "123", time_zone: "Madrid" }
+        } }
+      end
+    end
+
+    assert_redirected_to event_url(Event.last)
+  end
+
+  test "should create an event and assign it to existing user" do
+    assert_difference("Event.count", 1) do
+      assert_difference("User.count", 0) do
+        post service_events_url(@service), params: { event: {
+          slot_rule_id: slot_rules(:one).id,
+          status: "booked",
+          date: Date.today.next_occurring(:monday),
+          user_attributes: { name: "Graciela", email: users(:user1).email, phone: "123", time_zone: "Madrid" }
         } }
       end
     end
