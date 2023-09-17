@@ -1,12 +1,11 @@
 <div class="inline">
   <% if @current_user.owns?(@service) %>
-    <%= button_to "Bloquear esta cita",
-      service_events_path,
-      params: { event: { slot_rule_id: event.slot_rule_id, date: event.date, status: :blocked } },
-      class: "rounded-lg mt-3 py-3 px-5 bg-red-100 text-black inline-block font-medium cursor-pointer" %>
-    
     <div data-controller="visibility">
       <div data-visibility-target="hideable">
+        <%= button_to "Bloquear esta cita",
+          service_events_path,
+          params: { event: { slot_rule_id: event.slot_rule_id, date: event.date, status: :blocked } },
+          class: "rounded-lg mt-3 py-3 px-5 bg-red-100 text-black inline-block font-medium cursor-pointer" %>
         <button data-action="visibility#showTargets" class="rounded-lg mt-3 py-3 px-5 bg-green-100 text-black inline-block font-medium cursor-pointer">Crear cita</button>
       </div>
       
