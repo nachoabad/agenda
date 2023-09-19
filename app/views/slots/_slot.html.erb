@@ -1,6 +1,11 @@
 <% if slot.event %>
-  <%= link_to slot.time, event_path(slot.event), 
-    class: "rounded-lg mt-1 py-3 px-5 bg-#{slot_color(slot.event)}-100 inline-block font-medium" %>
+  <%= link_to event_path(slot.event),
+    class: "rounded-lg mt-1 py-3 px-5 bg-#{slot_color(slot.event)}-100 inline-block font-medium" do %>
+      <% if slot.event.booked? %>
+        <span class="text-sm"><%= slot.name %><br></span>
+      <% end %>
+      <%= slot.time %>
+  <% end %>
 <% else %>
   <%= link_to slot.time, new_service_event_path(
       @service,

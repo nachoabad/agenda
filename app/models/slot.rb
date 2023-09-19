@@ -17,4 +17,8 @@ class Slot
   def date
     @user_time_zone_date_time.to_date
   end
+
+  def name
+    event.name || event.user.name if event.booked?
+  end
 end

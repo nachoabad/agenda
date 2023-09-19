@@ -62,6 +62,7 @@ class EventsTest < ApplicationSystemTestCase
     sign_in users(:admin1)
     visit service_slots_path(@service)
 
+    assert page.has_css?('.bg-green-100', text: users(:user1).name)
     assert page.has_css?('.bg-green-100', text: "8:00am")
     assert page.has_css?('.bg-gray-100', text: "3:00pm")
 
