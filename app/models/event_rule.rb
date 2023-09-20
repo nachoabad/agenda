@@ -17,10 +17,11 @@ class EventRule < ApplicationRecord
 
   def create_events_from(event)
     event_date = event.date
+    event_name = event.name
 
     10.times do
       event_date = event_date + RECURRENCE_DAYS[recurrence.to_sym]
-      user.events.create slot_rule:, date: event_date
+      user.events.create slot_rule:, date: event_date, name: event_name
     end
   end
 end

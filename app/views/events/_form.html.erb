@@ -58,6 +58,18 @@
             </div>
           <% end %>
 
+          <% if @service.accepts_event_rules %>
+            <div class="my-5">
+              <%= form.label :recurrencia %><br />
+              <%= form.select(
+                :recurrence,
+                {"Cita puntual" => :punctual, "Cita semanal" => :weekly, "Cita quincenal" => :biweekly },
+                { include_blank: false },
+                { class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" }
+              ) %>
+            </div>
+          <% end %>
+
           <div class="inline">
             <%= form.submit "Crear cita", class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
           </div>

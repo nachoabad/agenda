@@ -48,15 +48,16 @@ class EventsController < ApplicationController
     end
 
     if @event.save
-      if params[:event][:recurrence]
-        @event_rule = current_user.event_rules.create!(event_rule_params)
+      recurrence = params[:event][:recurrence]
+      if recurrence == "weekly" || recurrence == "biweekly"
+        @event_rule = @event.user.event_rules.create!(event_rule_params)
         @event_rule.create_events_from(@event)
 
         notice = "Cita #{t('activerecord.attributes.event_rule.recurrences.' + @event_rule&.recurrence)} creada éxitosamente"
       end
       notice ||= @event.blocked? ? "Cita bloqueada éxitosamente" : "Cita creada éxitosamente"
 
-      EventMailer.with(event: @event).created_email.deliver_later if @event.booked?
+      EventMailer.with(event: @event).created_email.deliver_later if @event.booked? && !@event.user.owns?(@event.service)
       redirect_to event_url(@event), notice:
     else
       render :new, status: :unprocessable_entity

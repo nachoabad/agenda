@@ -29,19 +29,38 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to event_url(Event.last)
   end
 
-  test "should create an event and user event" do
+  test "should create an event and a event user" do
     assert_difference("Event.count", 1) do
       assert_difference("User.count", 1) do
         post service_events_url(@service), params: { event: {
           slot_rule_id: slot_rules(:one).id,
           status: "booked",
           date: Date.today.next_occurring(:monday),
+          recurrence: :punctual,
           user_attributes: { name: "Graciela", email: "gra@cie.la", phone: "123", time_zone: "Madrid" }
         } }
       end
     end
 
     assert_redirected_to event_url(Event.last)
+  end
+
+  test "should create an event rules, 11 events and a user event" do
+    assert_difference("EventRule.count", 1) do
+      assert_difference("Event.count", 11) do
+        assert_difference("User.count", 1) do
+          post service_events_url(@service), params: { event: {
+            slot_rule_id: slot_rules(:one).id,
+            status: "booked",
+            date: Date.today.next_occurring(:monday),
+            recurrence: :biweekly,
+            user_attributes: { name: "Graciela", email: "gra@cie.la", phone: "123", time_zone: "Madrid" }
+          } }
+        end
+      end
+    end
+
+    assert_redirected_to event_url(Event.last(11).first)
   end
 
   test "should create an event and assign it to existing user" do
@@ -59,7 +78,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to event_url(Event.last)
   end
 
-  test "should create an event but no user event" do
+  test "should create an event but no event user" do
     assert_difference("Event.count", 1) do
       assert_difference("User.count", 0) do
         post service_events_url(@service), params: { event: {
@@ -72,6 +91,24 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to event_url(Event.last)
+  end
+
+  test "should create an event rule, 11 events but no event user" do
+    assert_difference("EventRule.count", 1) do
+      assert_difference("Event.count", 11) do
+        assert_difference("User.count", 0) do
+          post service_events_url(@service), params: { event: {
+            slot_rule_id: slot_rules(:one).id,
+            status: "booked",
+            date: Date.today.next_occurring(:monday),
+            recurrence: :weekly,
+            user_attributes: { name: "Graciela" }
+          } }
+        end
+      end
+    end
+
+    assert_redirected_to event_url(Event.last(11).first)
   end
 
   test "should create recurrent events" do
