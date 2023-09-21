@@ -3,6 +3,8 @@ namespace :date_events_reminder_emails do
 
   task :send => [ :environment ] do
     Event.booked.where(date: Date.tomorrow).find_each do |event|
+      next if event.user.owns?(event.service)
+
       EventMailer.with(event: event).reminder_email.deliver_now
       puts "-> -> Email sent to #{event.user.email}"
     end
