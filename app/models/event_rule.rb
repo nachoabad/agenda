@@ -15,11 +15,11 @@ class EventRule < ApplicationRecord
     slot_rule.date_time(start_date).in_time_zone(user.time_zone)
   end
 
-  def create_events_from(event)
+  def create_events_from(event, qty: 10)
     event_date = event.date
     event_name = event.name
 
-    10.times do
+    qty.times do
       event_date = event_date + RECURRENCE_DAYS[recurrence.to_sym]
       user.events.create slot_rule:, date: event_date, name: event_name
     end
