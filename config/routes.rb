@@ -16,5 +16,5 @@ Rails.application.routes.draw do
 
   get '/:id', to: 'services#show'
 
-  root 'services#index'
+  root 'pages#index'
 end
