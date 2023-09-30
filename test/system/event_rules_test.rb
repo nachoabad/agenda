@@ -22,11 +22,11 @@ class EventRulesTest < ApplicationSystemTestCase
     assert_text @service.name
     assert_no_text "3:00am"
 
-    click_on ">"
+    click_on "→"
     assert_text @service.name
     assert_text "3:00am"
 
-    click_on ">"
+    click_on "→"
     assert_text @service.name
     assert_no_text "3:00am"
 
@@ -55,9 +55,9 @@ class EventRulesTest < ApplicationSystemTestCase
     visit service_slots_path(@service)
 
     assert page.has_css?('.bg-green-100', text: "8:00am")
-    click_on ">"
+    click_on "→"
     assert page.has_css?('.bg-gray-100', text: "8:00am")
-    click_on ">"
+    click_on "→"
     assert page.has_css?('.bg-green-100', text: "8:00am")
 
     click_on "Mis citas"
@@ -87,9 +87,9 @@ class EventRulesTest < ApplicationSystemTestCase
 
     assert page.has_css?('.bg-green-100', text: "New Recurrent User")
     assert page.has_css?('.bg-green-100', text: "8:00am")
-    click_on ">"
+    click_on "→"
     assert page.has_css?('.bg-gray-100', text: "8:00am")
-    click_on ">"
+    click_on "→"
     assert page.has_css?('.bg-green-100', text: "New Recurrent User")
     assert page.has_css?('.bg-green-100', text: "8:00am")
   end
@@ -113,9 +113,9 @@ class EventRulesTest < ApplicationSystemTestCase
 
     assert page.has_css?('.bg-green-100', text: users(:user1).name)
     assert page.has_css?('.bg-green-100', text: "8:00am")
-    click_on ">"
+    click_on "→"
     assert page.has_css?('.bg-gray-100', text: "8:00am")
-    click_on ">"
+    click_on "→"
     assert page.has_css?('.bg-green-100', text: users(:user1).name)
     assert page.has_css?('.bg-green-100', text: "8:00am")
   end
@@ -136,7 +136,7 @@ class EventRulesTest < ApplicationSystemTestCase
 
     assert page.has_css?('.bg-green-100', text: "New User Event Name")
     assert page.has_css?('.bg-green-100', text: "8:00am")
-    click_on ">"
+    click_on "→"
     assert page.has_css?('.bg-green-100', text: "New User Event Name")
     assert page.has_css?('.bg-green-100', text: "8:00am")
   end

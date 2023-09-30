@@ -27,7 +27,7 @@
   </div>
 
   <div class="flex justify-between items-center m-6">
-    <%= link_to '<', service_slots_path(@service, date: @date - 7.days), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-    <%= link_to '>', service_slots_path(@service, date: @date + 7.days), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= link_to '←', service_slots_path(@service, date: @date - 7.days), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= link_to '→', service_slots_path(@service, date: @date + 7.days), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 </div>
