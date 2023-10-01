@@ -28,6 +28,10 @@
     <strong class="block font-medium mb-1">Hora: <%= event.user_date_time(current_user).strftime('%l:%M%P') %> <%= current_user.time_zone %></strong>
   </p>
 
+  <% if event.slot_rule.long_note.present? %>
+    <p class="py-2 px-3 bg-green-50 text-green-500 font-medium rounded-lg inline-block"><%= event.slot_rule.long_note %></p>
+  <% end %>
+
   <% if action_name == "index" %>
     <%= render partial: "events/actions", locals: {event:} %>
     <hr class="my-6">

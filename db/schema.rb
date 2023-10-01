@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_201744) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_01_103456) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +73,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_201744) do
     t.bigint "service_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "short_note"
+    t.string "long_note"
     t.index ["service_id"], name: "index_slot_rules_on_service_id"
   end
 

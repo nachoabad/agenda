@@ -7,9 +7,14 @@
       <%= slot.time %>
   <% end %>
 <% else %>
-  <%= link_to slot.time, new_service_event_path(
+  <%= link_to new_service_event_path(
       @service,
       rule_id: slot.rule.id,
       service_time_zone_date: slot.service_time_zone_date
-    ), class: "rounded-lg mt-1 py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    ), class: "rounded-lg mt-1 py-3 px-5 bg-gray-100 inline-block font-medium" do %>
+    <% if slot.rule.short_note.present? %>
+      <span class="text-xs"><%= slot.rule.short_note %><br></span>
+    <% end %>
+    <%= slot.time %>
+  <% end %>
 <% end %>
