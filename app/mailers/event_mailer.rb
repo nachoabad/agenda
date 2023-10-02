@@ -8,7 +8,7 @@ class EventMailer < ApplicationMailer
       to: @event.user.email,
       from: email_address_with_name('info@decktra.com', @event.service.user.name),
       reply_to: @event.service.user.email,
-      subject: "Recordatorio Cita #{@event.service.name} 🔔"
+      subject: "🔔 Recordatorio Cita #{@event.service.name}"
     )
   end
 
@@ -20,7 +20,7 @@ class EventMailer < ApplicationMailer
       to: @event.service.user.email,
       from: email_address_with_name('info@decktra.com', @event.user.name.titleize),
       reply_to: @event.user.email,
-      subject: "!Nueva cita #{I18n.l @event.user_date_time(@event.service.user), format: :short}! 🎉"
+      subject: "🎉 Nueva cita #{I18n.l @event.user_date_time(@event.service.user), format: :short}"
     )
   end
 end
