@@ -1,0 +1,2 @@
+class WebLead < ApplicationRecord
+end

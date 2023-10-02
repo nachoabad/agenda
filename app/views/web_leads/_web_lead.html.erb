@@ -1,0 +1,27 @@
+<div id="<%= dom_id web_lead %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= web_lead.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Email:</strong>
+    <%= web_lead.email %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Phone:</strong>
+    <%= web_lead.phone %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Message:</strong>
+    <%= web_lead.message %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this web lead", web_lead, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this web lead', edit_web_lead_path(web_lead), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

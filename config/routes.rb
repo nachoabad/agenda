@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   resources :payments, only: %i[index edit update]
   resource :time_zone
 
+  resources :web_leads, only: %i[create]
+  get '/thanks', to: 'pages#thanks'
+
   get '/:id', to: 'services#show'
 
   root 'pages#index'
