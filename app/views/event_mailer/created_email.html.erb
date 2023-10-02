@@ -280,7 +280,7 @@
             	<tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
             		<td style="padding: 0 2.5em; text-align: left;">
             			<div class="text">
-            				<h3>Hola <%= @event.name.split.first.titleize %>,</h3>
+                    <h3>Hola <%= @event.service.user.name.split.first.titleize %>,</h3>
                     <h3>¡Tienes una nueva cita! 🎉</h3>
                     <h3><b><%= @event.user.name.titleize %></b> <%= @event.user.email %> <%= @event.user.phone %></h3>
                     <h3>🗓️ <%= l @event.user_date_time(@event.service.user).to_date %></h3>
