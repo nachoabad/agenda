@@ -19,6 +19,6 @@ class Slot
   end
 
   def name
-    event.name || event.user.name if event.booked?
+    (event.name || event.user.name).titleize if event.booked?
   end
 end

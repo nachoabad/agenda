@@ -20,7 +20,9 @@ class EventMailer < ApplicationMailer
       to: @event.service.user.email,
       from: email_address_with_name('info@decktra.com', @event.user.name.titleize),
       reply_to: @event.user.email,
-      subject: "🎉 Nueva cita #{I18n.l @event.user_date_time(@event.service.user), format: :short}"
+      subject: "Nueva cita #{I18n.l @event.user_date_time(@event.service.user), format: :short}"
     )
   end
 end
+
+605092867
