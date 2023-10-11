@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :event_rules
   resources :payments, only: %i[index edit update]
+  resources :incomes, only: %i[index show]
   resource :time_zone
 
   resources :web_leads, only: %i[create]

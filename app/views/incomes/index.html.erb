@@ -4,16 +4,12 @@
   <% end %>
 
   <div class="flex justify-between items-center">
-    <h1 class="font-bold text-3xl">Pagos</h1>
+    <h1 class="font-bold text-3xl">Ingresos</h1>
     <%= link_to 'Regresar', service_slots_path(@service), class: "rounded-lg py-3 px-5 bg-gray-100 block font-medium" %>
   </div>
 
-  <p class="block font-medium w-1/2 text-left">
-    <%= link_to "Ver ingresos", incomes_path, class: "text-blue-600" if current_user.owns?(@service) %>
-  </p>
-
   <div id="events" class="mt-5 min-w-full">
     <hr class="my-6">
-    <%= render @payments %>
+    <%= render @incomes %>
   </div>
 </div>
