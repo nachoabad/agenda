@@ -9,7 +9,17 @@ class User < ApplicationRecord
   has_many :event_rules
   has_many :payments, through: :events
 
+  # TODO: add custom timezones hash
+  before_save :fix_time_zones
+
   def owns?(service)
     service.user_id == id
+  end
+
+  private
+
+  # TODO: add custom timezones hash
+  def fix_time_zones
+    self.time_zone = "Central America" if time_zone == "Mexico City"
   end
 end
