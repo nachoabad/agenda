@@ -82,6 +82,7 @@ es:
     formats:
       default: "%a %-d de %b %Y"
       long: "%-d de %B de %Y"
+      month_year: "%B %Y"
       short: "%-d de %b"
     month_names:
     -

@@ -1,4 +1,10 @@
 class Payment < ApplicationRecord
+  CURRENCY_SYMBOLS = {
+    'USD' => '$',
+    'EUR' => '€',
+    'BS' => 'Bs'
+  }
+
   belongs_to :event
 
   enum status: { pending: 0, reported: 1, confirmed: 2 }
