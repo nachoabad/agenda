@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get '/google_redirect', to: 'google#redirect', as: 'google_redirect'
+  get '/google_callback', to: 'google#callback', as: 'google_callback'
+  get '/google_calendars', to: 'google#calendars', as: 'google_calendars'
+
   devise_for :users, :controllers => {
     registrations: 'registrations'
   }

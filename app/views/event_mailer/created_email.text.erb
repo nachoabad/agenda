@@ -1,7 +1,11 @@
 Nueva Cita <%= @event.service.name %>
 ===============================================
 
+<% if @event.name %>
+<%= @event.name.titleize %>
+<% else %>
 <%= @event.user.name.titleize %>
+<% end %>
 
 Fecha: <%= l @event.user_date_time(@event.service.user).to_date %>
 

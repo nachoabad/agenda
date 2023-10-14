@@ -280,17 +280,11 @@
             	<tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
             		<td style="padding: 0 2.5em; text-align: left;">
             			<div class="text">
-                    <h3>Hola <%= @event.service.user.name.split.first.titleize %>,</h3>
-                    <h3>Tienes una nueva cita:</h3>
-                    <h3>
-                      <% if @event.name %>
-                        <b><%= @event.name.titleize %></b>
-                      <% else %>
-                        <b><%= @event.user.name.titleize %></b> <%= @event.user.email %> <%= @event.user.phone %>
-                      <% end %>
-                    </h3>
-                    <h3>🗓️ <%= l @event.user_date_time(@event.service.user).to_date %></h3>
-                    <h3>⏰ <%= @event.user_date_time(@event.service.user).strftime('%l:%M%P') %> <%= @event.service.user.time_zone %></h3>
+                    <h3>Hola <%= @event.user.name.split.first.titleize %>,</h3>
+                    <h3>Te confirmamos tu cita con:</h3>
+                    <h3><b><%= @event.service.user.name.titleize %></b> <%= @event.service.user.email %> <%= @event.service.user.phone %></h3>
+                    <h3>🗓️ <%= l @event.user_date_time(@event.user).to_date %></h3>
+                    <h3>⏰ <%= @event.user_date_time(@event.user).strftime('%l:%M%P') %> <%= @event.user.time_zone %></h3>
             			</div>
             		</td>
             	</tr>
@@ -313,7 +307,8 @@
       <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
         <tr>
           <td class="bg_white" style="text-align: center;">
-          	<p>¿Tienes alguna duda?<br>
+            <p>¿Tienes alguna duda?<br>
+            ¿Necesitas un sistema de citas para ti?<br>
             Escríbenos a <span style="color: rgba(0,0,0,.8);">citascc@decktra.com</span></p>
           </td>
         </tr>

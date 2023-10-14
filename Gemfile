@@ -52,6 +52,8 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem 'devise'
+gem 'google-api-client', require: 'google/apis/calendar_v3'
+gem 'icalendar'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -57,7 +57,9 @@ class EventsController < ApplicationController
       end
       notice ||= @event.blocked? ? "Cita bloqueada éxitosamente" : "Cita creada éxitosamente"
 
-      EventMailer.with(event: @event).created_email.deliver_later if @event.booked? && !@event.user.owns?(@event.service)
+      EventMailer.with(event: @event).created_email.deliver_later if @event.booked?
+      EventMailer.with(event: @event).confirmation_email.deliver_later if @event.booked? && !@event.user.owns?(@event.service)
+
       redirect_to event_url(@event), notice:
     else
       render :new, status: :unprocessable_entity
