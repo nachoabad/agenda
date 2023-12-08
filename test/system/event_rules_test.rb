@@ -7,7 +7,7 @@ class EventRulesTest < ApplicationSystemTestCase
 
   test "user can create and cancel a recurrent event on standard time" do
      # standard time
-    travel_to Time.new(Time.current.year, 12, 01, 01, 04, 44)
+    travel_to Time.new(1.year.from_now.year, 12, 01, 01, 04, 44)
     sign_in users(:user1)
 
     visit service_slots_path(@service)
@@ -40,7 +40,7 @@ class EventRulesTest < ApplicationSystemTestCase
 
   test "admin can see and cancel a recurrent user event on standard time" do
     # standard time
-    travel_to Time.new(Time.current.year, 12, 01, 01, 04, 44)
+    travel_to Time.new(1.year.from_now.year, 12, 01, 01, 04, 44)
     sign_in users(:user1)
 
     visit service_slots_path(@service)
@@ -70,7 +70,7 @@ class EventRulesTest < ApplicationSystemTestCase
 
   test "admin can create a recurrent user event for a new registered user on standard time" do
     # standard time
-    travel_to Time.new(Time.current.year, 12, 01, 01, 04, 44)
+    travel_to Time.new(1.year.from_now.year, 12, 01, 01, 04, 44)
     sign_in users(:admin1)
     visit service_slots_path(@service)
 
@@ -96,7 +96,7 @@ class EventRulesTest < ApplicationSystemTestCase
 
   test "admin can create a recurrent user event for an already registered user on standard time" do
     # standard time
-    travel_to Time.new(Time.current.year, 12, 01, 01, 04, 44)
+    travel_to Time.new(1.year.from_now.year, 12, 01, 01, 04, 44)
     sign_in users(:admin1)
     visit service_slots_path(@service)
 
@@ -122,7 +122,7 @@ class EventRulesTest < ApplicationSystemTestCase
 
   test "admin can create a recurrent user event for a none registered user on standard time" do
     # standard time
-    travel_to Time.new(Time.current.year, 12, 01, 01, 04, 44)
+    travel_to Time.new(1.year.from_now.year, 12, 01, 01, 04, 44)
     sign_in users(:admin1)
     visit service_slots_path(@service)
 

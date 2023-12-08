@@ -7,35 +7,35 @@ class EventsTest < ApplicationSystemTestCase
 
   test "user can create and cancel an event on standard time" do
      # standard time
-    travel_to Time.new(Time.current.year, 12, 01, 01, 04, 44)
+    travel_to Time.new(1.year.from_now.year, 12, 01, 01, 04, 44)
     sign_in users(:user1)
 
     visit service_slots_path(@service)
 
-    click_on "3:00am"
-    assert_text "3:00am"
+    click_on "10:00am"
+    assert_text "10:00am"
     
     click_on "Reservar esta cita"
     assert_text "Cita creada éxitosamente"
 
     click_on "Regresar"
-    assert_no_text "3:00am"
+    assert_no_text "10:00am"
 
     click_on "Mis citas"
-    assert_text "3:00am"
+    assert_text "10:00am"
 
     click_on "Cancelar esta cita"
     page.driver.browser.switch_to.alert.accept
     assert_text "Cita anulada éxitosamente"
-    assert_text "3:00am"
+    assert_text "10:00am"
 
     click_on "Mis citas"
-    assert_no_text "3:00am"
+    assert_no_text "10:00am"
   end
 
   test "admin can see and cancel an user event on standard time" do
     # standard time
-    travel_to Time.new(Time.current.year, 12, 01, 01, 04, 44)
+    travel_to Time.new(1.year.from_now.year, 12, 01, 01, 04, 44)
     sign_in users(:admin1)
     visit service_slots_path(@service)
 
@@ -46,28 +46,28 @@ class EventsTest < ApplicationSystemTestCase
     sign_in users(:user1)
     visit service_slots_path(@service)
 
-    click_on "3:00am"
-    assert_text "3:00am"
+    click_on "10:00am"
+    assert_text "10:00am"
     
     click_on "Reservar esta cita"
     assert_text "Cita creada éxitosamente"
 
     click_on "Regresar"
-    assert_no_text "3:00am"
+    assert_no_text "10:00am"
 
     click_on "Mis citas"
-    assert_text "3:00am"
+    assert_text "10:00am"
 
     sign_out(:user1)
     sign_in users(:admin1)
     visit service_slots_path(@service)
 
     assert page.has_css?('.bg-green-100', text: users(:user1).name)
-    assert page.has_css?('.bg-green-100', text: "8:00am")
-    assert page.has_css?('.bg-gray-100', text: "3:00pm")
+    assert page.has_css?('.bg-gray-100', text: "8:00am")
+    assert page.has_css?('.bg-green-100', text: "3:00pm")
 
     click_on "Mis citas"
-    assert_text "8:00am"
+    assert_text "3:00pm"
     assert_text users(:user1).name
 
     click_on "Cancelar esta cita"
@@ -81,14 +81,14 @@ class EventsTest < ApplicationSystemTestCase
     sign_in users(:user1)
     visit service_slots_path(@service)
 
-    assert_text "3:00am"
+    assert_text "10:00am"
     click_on "Mis citas"
-    assert_no_text "3:00am"
+    assert_no_text "10:00am"
   end
 
   test "admin can block and unblock a slot on standard time" do
     # standard time
-    travel_to Time.new(Time.current.year, 12, 01, 01, 04, 44)
+    travel_to Time.new(1.year.from_now.year, 12, 01, 01, 04, 44)
     sign_in users(:admin1)
     visit service_slots_path(@service)
 
@@ -125,7 +125,7 @@ class EventsTest < ApplicationSystemTestCase
 
   test "admin can create an event with no user" do
     # standard time
-    travel_to Time.new(Time.current.year, 12, 01, 01, 04, 44)
+    travel_to Time.new(1.year.from_now.year, 12, 01, 01, 04, 44)
     sign_in users(:admin1)
     visit service_slots_path(@service)
 
@@ -140,7 +140,7 @@ class EventsTest < ApplicationSystemTestCase
 
   test "admin can create an event registering a new user" do
     # standard time
-    travel_to Time.new(Time.current.year, 12, 01, 01, 04, 44)
+    travel_to Time.new(1.year.from_now.year, 12, 01, 01, 04, 44)
     sign_in users(:admin1)
     visit service_slots_path(@service)
 

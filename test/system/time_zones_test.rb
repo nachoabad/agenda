@@ -8,7 +8,7 @@ class TimeZonesTest < ApplicationSystemTestCase
 
   test "should set new user time zone on standard time" do
     # standard time
-    travel_to Time.new(Time.current.year, 12, 01, 01, 04, 44)
+    travel_to Time.new(1.year.from_now.year, 12, 01, 01, 04, 44)
     visit service_slots_path(@service)
     assert_text "3:00"
 
@@ -24,7 +24,7 @@ class TimeZonesTest < ApplicationSystemTestCase
 
   test "should set new user time zone on daylight time" do
     # daylight time
-    travel_to Time.new(Time.current.year, 06, 01, 01, 04, 44)
+    travel_to Time.new(1.year.from_now.year, 06, 01, 01, 04, 44)
     visit service_slots_path(@service)
     assert_text "2:00"
 
