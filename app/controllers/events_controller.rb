@@ -96,7 +96,7 @@ class EventsController < ApplicationController
         notice = @event.blocked? ? "Cita desbloqueada éxitosamente" : "Cita anulada éxitosamente"
       end
 
-      EventMailer.with(event: @event).destroyed_email.deliver_later if @event.booked?
+      # EventMailer.with(event: @event).destroyed_email.deliver_later if @event.booked?
       redirect_to service_slots_url(@event.service), notice:
     end
   end
