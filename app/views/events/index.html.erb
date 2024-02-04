@@ -9,7 +9,7 @@
   </div>
 
   <p class="block font-medium w-1/2 text-left">
-    <%= link_to "Ver pagos", payments_path, class: "text-blue-600" if current_user.owns?(@service) %>
+    <%= link_to "Ver pagos", payments_path, class: "text-blue-600" if current_user.owns?(@service) && @service.accepts_payments %>
   </p>
 
   <div id="events" class="mt-5 min-w-full">
