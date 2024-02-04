@@ -15,6 +15,7 @@ class EventsTest < ApplicationSystemTestCase
     click_on "10:00am"
     assert_text "10:00am"
     
+    fill_in "Comentario", with: "Mi comentario"
     click_on "Reservar esta cita"
     assert_text "Cita creada éxitosamente"
 
@@ -22,6 +23,7 @@ class EventsTest < ApplicationSystemTestCase
     assert_no_text "10:00am"
 
     click_on "Mis citas"
+    assert_text "Mi comentario"
     assert_text "10:00am"
 
     click_on "Cancelar esta cita"
@@ -132,10 +134,13 @@ class EventsTest < ApplicationSystemTestCase
     click_on "8:00am"
     click_on "Crear cita"
     fill_in "Nombre y Apellido", with: "User on event name"
+    fill_in "Comentario", with: "Mi comentario"
+
     click_on "Crear cita"
 
     assert_text "Cita creada éxitosamente"
     assert_text "User On Event Name"
+    assert_text "Mi comentario"
   end
 
   test "admin can create an event registering a new user" do

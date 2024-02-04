@@ -58,6 +58,13 @@
             </div>
           <% end %>
 
+          <% if @service.accepts_comments %>
+            <div class="my-5">
+              <%= form.label :comment %>
+              <%= form.text_field :comment, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+            </div>
+          <% end %>
+
           <% if @service.accepts_event_rules %>
             <div class="my-5">
               <%= form.label :recurrencia %><br />
@@ -77,10 +84,26 @@
       </div>
     </div>
   <% else %>
-    <%= button_to t(:schedule_event),
-      service_events_path,
-      params: { event: { slot_rule_id: event.slot_rule_id, date: event.date } },
-      class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= form_with(
+      model: @event,
+      url: [@service, event],
+      class: "contents") do |form| %>
+
+      <%= form.hidden_field :slot_rule_id, value: event.slot_rule.id %>
+      <%= form.hidden_field :date, value: event.date %>
+
+      <% if @service.accepts_comments %>
+        <div class="my-5">
+          <%= form.label :comment %>
+          <%= form.text_field :comment, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+        </div>
+      <% end %>
+
+      <div class="inline">
+        <%= form.submit t(:schedule_event), class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      </div>
+
+    <% end %>
   <% end %>
 </div>
 

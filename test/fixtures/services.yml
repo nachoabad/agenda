@@ -7,3 +7,4 @@ one:
   slug: "service1_slug"
   accepts_event_rules: true
   accepts_payments: true
+  accepts_comments: true

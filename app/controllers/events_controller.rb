@@ -116,7 +116,7 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:status, :slot_rule_id, :date)
+      params.require(:event).permit(:status, :slot_rule_id, :date, :comment)
     end
 
     def user_event_params
