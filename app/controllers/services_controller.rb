@@ -14,10 +14,10 @@ class ServicesController < ApplicationController
   private
 
   def set_service
-    service = Service.find_by slug: params[:id]
+    @service = Service.find_by slug: params[:id]
     session[:service_id] = @service.id
 
-    locale = service.locale || I18n.default_locale
+    locale = @service.locale || I18n.default_locale
     session[:locale] = locale
     I18n.locale = locale
   end
