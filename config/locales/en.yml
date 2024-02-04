@@ -34,6 +34,13 @@ en:
     attributes:
       event:
         comment: 'Comment'
+      user:
+        email: Email
+        name: Name
+        password: Password
+        password_confirmation: Password confirmation
+        phone: phone
+        remember_me: Remember me
   date:
     formats:
       default: "%a %b %-d %Y"
