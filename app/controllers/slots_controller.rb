@@ -13,5 +13,6 @@ class SlotsController < ApplicationController
   def set_service
     @service = Service.find params[:service_id]
     session[:service_id] = @service.id
+    session[:locale] = @service.locale
   end
 end

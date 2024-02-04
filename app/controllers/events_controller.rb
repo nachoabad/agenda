@@ -55,7 +55,7 @@ class EventsController < ApplicationController
 
         notice = "Cita #{t('activerecord.attributes.event_rule.recurrences.' + @event_rule&.recurrence)} creada éxitosamente"
       end
-      notice ||= @event.blocked? ? "Cita bloqueada éxitosamente" : "Cita creada éxitosamente"
+      notice ||= @event.blocked? ? t(:event_blocked) : t(:event_created)
 
       EventMailer.with(event: @event).created_email.deliver_later if @event.booked?
       EventMailer.with(event: @event).confirmation_email.deliver_later if @event.booked? && !@event.user.owns?(@event.service)
@@ -93,7 +93,7 @@ class EventsController < ApplicationController
           notice = "Citas recurrentes anuladas éxitosamente"
         end
       else
-        notice = @event.blocked? ? "Cita desbloqueada éxitosamente" : "Cita anulada éxitosamente"
+        notice = @event.blocked? ? t(:event_unblocked) : t(:event_canceled)
       end
 
       # EventMailer.with(event: @event).destroyed_email.deliver_later if @event.booked?
@@ -112,6 +112,7 @@ class EventsController < ApplicationController
     def set_service
       @service = Service.find params[:service_id]
       session[:service_id] = @service.id
+      session[:locale] = @service.locale
     end
 
     def event_params

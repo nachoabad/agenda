@@ -1,5 +1,5 @@
 <div class="mx-auto md:w-1/4 text-center w-full">
-  <h1 class="font-bold text-2xl">Selecciona tu zona horaria</h1>
+  <h1 class="font-bold text-2xl"><%= t(:select_your_time_zone) %></h1>
 
   <%= form_with(url: time_zone_path, class: "contents", method: :patch) do |form| %>
     <div class="my-5">
@@ -11,9 +11,9 @@
       ) %>
     </div>
     <div class="inline">
-      <%= form.submit "Guardar", class: "w-full my-5 rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      <%= form.submit t(:save), class: "w-full my-5 rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
     </div>
   <% end %>
 
-  <%= link_to 'Regresar', service_slots_path(@service), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <%= link_to t(:back), service_slots_path(@service), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 </div>

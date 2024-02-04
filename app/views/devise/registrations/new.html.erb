@@ -1,5 +1,5 @@
 <div class="mx-auto md:w-1/4 w-full">
-  <h1 class="font-bold text-3xl text-center">Registrarse</h1>
+  <h1 class="font-bold text-3xl text-center"><%= t(:signup)%></h1>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "contents") do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -12,7 +12,7 @@
     <div class="my-5">
       <%= f.label :password %>
       <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> caracteres mínimo)</em>
+      <em>(<%= @minimum_password_length %> <%= t(:minimum_characters) %>)</em>
       <% end %><br />
       <%= f.password_field :password, autocomplete: "new-password", class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: true %>
     </div>
@@ -29,7 +29,7 @@
 
     <div class="my-5">
       <%= f.label :phone %>
-      <em>(Incluir código internacional)</em><br />
+      <em>(<%= t(:add_international_code) %>)</em><br />
       <%= f.text_field :phone, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: true %>
     </div>
 
@@ -44,7 +44,7 @@
     </div>
 
     <div class="inline">
-      <%= f.submit "Registrarse", class: "w-full my-5 rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      <%= f.submit t(:signup), class: "w-full my-5 rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
     </div>
   <% end %>
 

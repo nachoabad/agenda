@@ -2,11 +2,11 @@
   <% if @current_user.owns?(@service) %>
     <div data-controller="visibility">
       <div data-visibility-target="hideable">
-        <%= button_to "Bloquear esta cita",
+        <%= button_to t(:block_event),
           service_events_path,
           params: { event: { slot_rule_id: event.slot_rule_id, date: event.date, status: :blocked } },
           class: "rounded-lg mt-3 py-3 px-5 bg-red-100 text-black inline-block font-medium cursor-pointer" %>
-        <button data-action="visibility#showTargets" class="rounded-lg mt-3 py-3 px-5 bg-green-100 text-black inline-block font-medium cursor-pointer">Crear cita</button>
+        <button data-action="visibility#showTargets" class="rounded-lg mt-3 py-3 px-5 bg-green-100 text-black inline-block font-medium cursor-pointer"><%= t(:create_event) %></button>
       </div>
       
       <div data-visibility-target="showable" hidden>
@@ -43,7 +43,7 @@
 
             <div class="my-5">
               <%= f.label :phone %>
-              <em>(Incluir código internacional)</em><br />
+              <em>(<%= t(:add_international_code) %>)</em><br />
               <%= f.text_field :phone, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
             </div>
 
@@ -71,13 +71,13 @@
           <% end %>
 
           <div class="inline">
-            <%= form.submit "Crear cita", class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+            <%= form.submit t(:create_event), class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
           </div>
         <% end %>
       </div>
     </div>
   <% else %>
-    <%= button_to "Reservar esta cita",
+    <%= button_to t(:schedule_event),
       service_events_path,
       params: { event: { slot_rule_id: event.slot_rule_id, date: event.date } },
       class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>

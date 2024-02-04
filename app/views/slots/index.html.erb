@@ -4,15 +4,15 @@
   <% end %>
 
   <div class="flex justify-between items-center">
-    <h1 class="font-bold text-xl text-left">Citas <%= @service.name %></h1>
-    <%= link_to 'Mis citas', 
+    <h1 class="font-bold text-xl text-left"><%= @service.name %></h1>
+    <%= link_to t(:my_events),
       service_events_path(@service),
       class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
   <p class="block font-medium w-1/2 text-left">
-    Hora <%= current_user.time_zone %>
-    <%= link_to "cambiar", edit_time_zone_path, class: "text-blue-600" %>
+    <%= t(:time_zone) %> <%= current_user.time_zone %>
+    <%= link_to t(:change_time_zone), edit_time_zone_path, class: "text-blue-600" %>
   </p>
 
   <div id="slots" class="min-w-full">

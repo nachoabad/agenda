@@ -17,7 +17,7 @@ class TimeZonesTest < ApplicationSystemTestCase
     select "(GMT+01:00) Madrid", from: :time_zone
     click_on "Guardar"
 
-    assert_text "Zona horario actulizada éxitosamente"
+    assert_text "Zona horario actualizada éxitosamente"
     assert_text "Madrid"
     assert_text "8:00"
   end
@@ -33,7 +33,7 @@ class TimeZonesTest < ApplicationSystemTestCase
     select "(GMT+01:00) Madrid", from: :time_zone
     click_on "Guardar"
 
-    assert_text "Zona horario actulizada éxitosamente"
+    assert_text "Zona horario actualizada éxitosamente"
     assert_text "Madrid"
     assert_text "8:00"
   end
