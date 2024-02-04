@@ -268,7 +268,7 @@
           	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
           		<tr>
           			<td class="logo" style="text-align: left;">
-			            <h1><a href="#">Citas CC</a></h1>
+			            <h1><a href="#"><%= t(:events) %> CC</a></h1>
 			          </td>
           		</tr>
           	</table>
@@ -280,8 +280,8 @@
             	<tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
             		<td style="padding: 0 2.5em; text-align: left;">
             			<div class="text">
-            				<h3>Hola <%= @event.user.name.split.first.titleize %>,</h3>
-                    <h3>Te recordamos tu cita con <%= @event.service.name %>.</h3>
+                    <h3><%= t(:hello) %> <%= @event.user.name.split.first.titleize %>,</h3>
+                    <h3><%= t(:reminder_event_with) %> <%= @event.service.name %>.</h3>
                     <h3>🗓️ <%= l @event.user_date_time(@event.user).to_date %></h3>
                     <h3>⏰ <%= @event.user_date_time(@event.user).strftime('%l:%M%P') %> <%= @event.user.time_zone %></h3>
             			</div>
@@ -295,7 +295,7 @@
             <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
 					  	<td valign="middle" style="text-align:left; padding: 1em 2.5em;">
 					  		<p>
-                  <%= link_to "Ver mis citas", service_events_url(@event.service), class: "btn btn-primary" %>
+                  <%= link_to t(:manage_event), service_events_url(@event.service), class: "btn btn-primary" %>
                 </p>
 					  	</td>
 					  </tr>
@@ -303,15 +303,17 @@
 	      </tr><!-- end tr -->
       <!-- 1 Column Text + Button : END -->
       </table>
-      <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
-        <tr>
-          <td class="bg_white" style="text-align: center;">
-          	<p>¿Tienes alguna duda?<br>
-            ¿Necesitas un sistema de citas para ti?<br>
-            Escríbenos a <span style="color: rgba(0,0,0,.8);">citascc@decktra.com</span></p>
-          </td>
-        </tr>
-      </table>
+      <% if @event.service.locale == 'es' %>
+        <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
+          <tr>
+            <td class="bg_white" style="text-align: center;">
+              <p>¿Tienes alguna duda?<br>
+              ¿Necesitas un sistema de citas para ti?<br>
+              Escríbenos a <span style="color: rgba(0,0,0,.8);">citascc@decktra.com</span></p>
+            </td>
+          </tr>
+        </table>
+      <% end %>
     </div>
   </center>
 </body>
