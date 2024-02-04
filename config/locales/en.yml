@@ -39,7 +39,7 @@ en:
         name: Name
         password: Password
         password_confirmation: Password confirmation
-        phone: phone
+        phone: Phone
         remember_me: Remember me
   date:
     formats:
