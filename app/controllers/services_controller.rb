@@ -8,7 +8,11 @@ class ServicesController < ApplicationController
 
   def show
     service = Service.find_by slug: params[:id]
-    session[:locale] = service.locale
+
+    locale = service.locale || I18n.default_locale
+    session[:locale] = locale
+    I18n.locale = locale
+
     redirect_to service_slots_path(service)
   end
 end
