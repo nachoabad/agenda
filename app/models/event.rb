@@ -25,6 +25,6 @@ class Event < ApplicationRecord
   private
 
   def create_pending_payment
-    create_payment unless blocked? || payment
+    create_payment unless blocked? || payment if service.accepts_payments
   end
 end
