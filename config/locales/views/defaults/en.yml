@@ -20,6 +20,7 @@ en:
   login: 'Log in'
   reset_password: 'Reset my password'
   save: 'Save'
+  schedule_event: 'Schedule event'
   select_your_time_zone: 'Select your timezone'
   signup: 'Sign up'
   time_zone: 'Timezone'
