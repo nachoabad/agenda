@@ -58,13 +58,6 @@
             </div>
           <% end %>
 
-          <% if @service.accepts_comments %>
-            <div class="my-5">
-              <%= form.label :comment %>
-              <%= form.text_field :comment, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-            </div>
-          <% end %>
-
           <% if service_types = @service.settings["service_types"] %>
             <div class="my-5">
               <%= form.label :service_type %>
@@ -74,6 +67,13 @@
                 {},
                 { class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: true }
               ) %>
+            </div>
+          <% end %>
+
+          <% if @service.accepts_comments %>
+            <div class="my-5">
+              <%= form.label :comment %>
+              <%= form.text_field :comment, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
             </div>
           <% end %>
 
@@ -104,13 +104,6 @@
       <%= form.hidden_field :slot_rule_id, value: event.slot_rule.id %>
       <%= form.hidden_field :date, value: event.date %>
 
-      <% if @service.accepts_comments %>
-        <div class="my-5">
-          <%= form.label :comment %>
-          <%= form.text_field :comment, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-        </div>
-      <% end %>
-
       <% if service_types = @service.settings["service_types"] %>
         <div class="my-5">
           <%= form.label :service_type %>
@@ -120,6 +113,13 @@
             {},
             { class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: true }
           ) %>
+        </div>
+      <% end %>
+
+      <% if @service.accepts_comments %>
+        <div class="my-5">
+          <%= form.label :comment %>
+          <%= form.text_field :comment, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
         </div>
       <% end %>
 
