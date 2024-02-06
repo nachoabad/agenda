@@ -4,6 +4,7 @@ es:
     attributes:
       event:
         comment: 'Comentario'
+        service_type: 'Servicio'
       event_rule:
         recurrences:
           weekly: "Semanal"

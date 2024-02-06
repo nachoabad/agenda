@@ -65,6 +65,18 @@
             </div>
           <% end %>
 
+          <% if service_types = @service.settings["service_types"] %>
+            <div class="my-5">
+              <%= form.label :service_type %>
+              <%= form.select(
+                :service_type,
+                service_types,
+                {},
+                { class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: true }
+              ) %>
+            </div>
+          <% end %>
+
           <% if @service.accepts_event_rules %>
             <div class="my-5">
               <%= form.label :recurrencia %><br />
@@ -96,6 +108,18 @@
         <div class="my-5">
           <%= form.label :comment %>
           <%= form.text_field :comment, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+        </div>
+      <% end %>
+
+      <% if service_types = @service.settings["service_types"] %>
+        <div class="my-5">
+          <%= form.label :service_type %>
+          <%= form.select(
+            :service_type,
+            service_types,
+            {},
+            { class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", required: true }
+          ) %>
         </div>
       <% end %>
 

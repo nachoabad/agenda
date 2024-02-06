@@ -15,6 +15,7 @@ class EventRulesTest < ApplicationSystemTestCase
     click_on "3:00am"
     assert_text "3:00am"
 
+    select  "Service B", from: "Servicio"
     click_on "Reservar este horario quincenal"
     assert_text "Cita Quincenal creada éxitosamente"
 
@@ -47,6 +48,7 @@ class EventRulesTest < ApplicationSystemTestCase
 
     click_on "3:00am"
 
+    select  "Service B", from: "Servicio"
     click_on "Reservar este horario quincenal"
     assert_text "Cita Quincenal creada éxitosamente"
 
@@ -81,6 +83,7 @@ class EventRulesTest < ApplicationSystemTestCase
     fill_in "Teléfono", with: "+34123456789"
     select "(GMT+01:00) Madrid", from: "Zona horario"
     select "Cita quincenal"
+    select  "Service B", from: "Servicio"
     click_on "Crear cita"
 
     click_on "Regresar"
@@ -107,6 +110,7 @@ class EventRulesTest < ApplicationSystemTestCase
     fill_in "Teléfono", with: "+34123456789"
     select "(GMT+01:00) Madrid", from: "Zona horario"
     select "Cita quincenal"
+    select  "Service B", from: "Servicio"
     click_on "Crear cita"
 
     click_on "Regresar"
@@ -130,6 +134,7 @@ class EventRulesTest < ApplicationSystemTestCase
     click_on "Crear cita"
     fill_in "Nombre y Apellido", with: "New User Event Name"
     select "Cita semanal"
+    select  "Service B", from: "Servicio"
     click_on "Crear cita"
 
     click_on "Regresar"

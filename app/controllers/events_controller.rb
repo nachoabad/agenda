@@ -116,11 +116,11 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:status, :slot_rule_id, :date, :comment)
+      params.require(:event).permit(:status, :slot_rule_id, :date, :comment, :service_type)
     end
 
     def user_event_params
-      params.require(:event).permit(:status, :slot_rule_id, :date, user_attributes: [:name, :email, :phone, :time_zone])
+      params.require(:event).permit(:status, :slot_rule_id, :date, :comment, :service_type, user_attributes: [:name, :email, :phone, :time_zone])
     end
 
     def event_rule_params

@@ -28,6 +28,7 @@ es:
   save: 'Guardar'
   schedule_event: 'Reservar esta cita'
   select_your_time_zone: 'Selecciona tu zona horaria'
+  service_type: 'Servicio'
   signup: 'Registrarse'
   time_zone: 'Hora'
   time_zone_saved: 'Zona horario actualizada éxitosamente'

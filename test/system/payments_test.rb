@@ -12,6 +12,7 @@ class PaymentsTest < ApplicationSystemTestCase
     visit service_slots_path(@service)
 
     click_on "3:00am"
+    select  "Service B", from: "Servicio"
     click_on "Reservar esta cita"
     click_on "Reportar pago"
 

@@ -28,6 +28,7 @@ en:
   save: 'Save'
   schedule_event: 'Schedule event'
   select_your_time_zone: 'Select your timezone'
+  service_type: 'Service'
   signup: 'Sign up'
   time_zone: 'Timezone'
   time_zone_saved: 'Timezone successfully saved'

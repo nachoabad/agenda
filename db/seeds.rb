@@ -2,7 +2,8 @@ admin = User.create_with(password: "adminadmin", password_confirmation: "adminad
 service = admin.services.first_or_create! name: "Consultas", time_zone: "Madrid"
 
 admin2 = User.create_with(password: "adminadmin", password_confirmation: "adminadmin", name: "Pablo Raydan", time_zone: "Madrid").find_or_create_by! email: "admin2@mail.com"
-service2 = admin2.services.first_or_create! name: "Consultas Recurrents", time_zone: "Madrid", accepts_event_rules: true
+service2 = admin2.services.first_or_create! name: "Consultas Recurrents", time_zone: "Madrid", accepts_event_rules: true,
+settings: {service_types: ["Passport", "Notary", "Notary w/ witness (Mon,Wed,Fri)"]}
 
 user = User.create_with(password: "useruser", password_confirmation: "useruser", name: "María Miami", time_zone: "Eastern Time (US & Canada)").find_or_create_by! email: "user@mail.com"
 
