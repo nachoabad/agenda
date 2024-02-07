@@ -12,14 +12,18 @@
 
   <p class="block font-medium w-1/2 text-left">
     <%= t(:time_zone) %> <%= current_user.time_zone %>
-    <%= link_to t(:change_time_zone), edit_time_zone_path, class: "text-blue-600" %>
+    <%= link_to t(:change_time_zone), edit_time_zone_path, class: "text-blue-600 text-sm" %>
   </p>
 
   <div id="slots" class="min-w-full">
     <hr class="mt-5">
     <% @slots.keys.each do |date| %>
       <p class="my-5">
-        <strong class="block font-medium mb-1"><%= l date %></strong>
+        <strong class="block font-medium mb-1">
+          <%= l date %>
+          <%= link_to t(:block), new_service_date_blocker_path(@service, date_to_block: date), class: "text-blue-600 text-sm" if current_user.owns?(@service) %>
+        </strong>
+
         <%= render @slots[date] %>
         <hr class="mt-2">
       </p>

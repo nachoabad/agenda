@@ -45,7 +45,7 @@ en:
   date:
     formats:
       default: "%a %b %-d %Y"
-      long: "%B %-d Y"
+      long: "%A %B %-d %Y"
       month_year: "%B %Y"
       short: "%-d de %b"
   devise:

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :slots
     resources :events
     resources :slot_rules
+    resources :date_blockers, only: %i[new create]
   end
 
   resources :event_rules
