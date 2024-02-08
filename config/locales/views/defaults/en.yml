@@ -2,7 +2,6 @@
 en:
   add_international_code: 'add country code'
   back: 'Back'
-  block: 'block'
   block_date: 'Block date'
   block_event: 'Block event'
   blocked_event: 'Blocked event'
@@ -11,6 +10,7 @@ en:
   confirm_continue: 'Are you sure?'
   create_event: 'Create event'
   date_blocked: 'Date successfully blocked'
+  date_unblocked: 'Date successfully unblocked'
   event: 'Event'
   events: 'Events'
   event_canceled: 'Event successfully canceled'
@@ -35,4 +35,5 @@ en:
   signup: 'Sign up'
   time_zone: 'Timezone'
   time_zone_saved: 'Timezone successfully saved'
+  unblock_date: 'Unblock date'
   unblock_event: 'Unblock this event'

@@ -1,17 +1,22 @@
 <div class="mx-auto md:w-1/4 w-full text-center">
   <div class="flex justify-between items-center mb-12">
-    <h1 class="font-bold text-3xl"><%= t(:block).upcase_first %></h1>
-    <%= link_to t(:back), service_slots_path(@service, date: @date_to_block), class: "rounded-lg py-3 px-5 bg-gray-100 block font-medium" %>
+    <h1 class="font-bold text-3xl"><%= t('activerecord.attributes.event.date') %></h1>
+    <%= link_to t(:back), service_slots_path(@service, date: @date), class: "rounded-lg py-3 px-5 bg-gray-100 block font-medium" %>
   </div>
 
   <div class="text-center">
     <p class="my-6">
-      <strong class="block font-large mb-1"><%= l(@date_to_block, format: :long).upcase_first %></strong>
+      <strong class="block font-large text-xl mb-1"><%= l(@date, format: :long).upcase_first %></strong>
     </p>
 
     <%= button_to t(:block_date),
-    service_date_blockers_path(@service, date_to_block: @date_to_block),
+    service_date_blockers_path(@service, date: @date, date_action: 'block'),
     form: { data: { turbo_confirm: t(:confirm_continue) } },
-    class: "mt-3 rounded-lg py-3 px-5 bg-red-100 font-medium" %>
+    class: "w-full mt-3 rounded-lg py-3 px-5 bg-red-100 font-medium" %>
+
+    <%= button_to t(:unblock_date),
+    service_date_blockers_path(@service, date: @date, date_action: 'unblock'),
+    form: { data: { turbo_confirm: t(:confirm_continue) } },
+    class: "w-full mt-3 rounded-lg py-3 px-5 bg-green-100 font-medium" %>
   </div>
 </div>

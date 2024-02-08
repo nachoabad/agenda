@@ -34,6 +34,7 @@ en:
     attributes:
       event:
         comment: 'Comment'
+        date: 'Date'
         service_type: 'Service'
       user:
         email: Email

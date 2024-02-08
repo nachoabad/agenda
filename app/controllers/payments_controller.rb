@@ -8,6 +8,7 @@ class PaymentsController < ApplicationController
   end
 
   def edit
+    @editable = !@payment.confirmed? || current_user.owns?(@payment.service)
   end
 
   def update

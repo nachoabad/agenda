@@ -2,7 +2,6 @@
 es:
   add_international_code: 'incluir código internacional'
   back: 'Regresar'
-  block: 'bloquear'
   block_date: 'Bloquear fecha'
   block_event: 'Bloquear esta cita'
   blocked_event: 'Cita bloqueada'
@@ -11,6 +10,7 @@ es:
   confirm_continue: '¿Confirmas que deseas proceder?'
   create_event: 'Crear cita'
   date_blocked: 'Fecha  bloqueada éxitosamente'
+  date_unblocked: 'Fecha  desbloqueada éxitosamente'
   event: 'Cita'
   events: 'Citas'
   event_canceled: 'Cita anulada éxitosamente'
@@ -35,4 +35,5 @@ es:
   signup: 'Registrarse'
   time_zone: 'Hora'
   time_zone_saved: 'Zona horario actualizada éxitosamente'
+  unblock_date: 'Desbloquear fecha'
   unblock_event: 'Desbloquear esta cita'

@@ -15,13 +15,13 @@
   <div class="my-3">
     <%= form.label :date %>
     <%= form.date_field :date, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-1 w-full",
-    required: true, disabled: payment.confirmed? %>
+    required: true, disabled: !@editable %>
   </div>
 
   <div class="my-2">
     <%= form.label :amount %>
     <%= form.text_field :amount, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-1",
-    required: true, disabled: payment.confirmed? %>
+    required: true, disabled: !@editable %>
   </div>
 
   <div class="my-2">
@@ -29,13 +29,13 @@
     <%= form.select :currency, Payment.currencies.keys,
     { include_blank: true },
     { class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-1 w-full",
-    required: true, disabled: payment.confirmed? } %>
+    required: true, disabled: !@editable } %>
   </div>
 
   <div class="my-2">
     <%= form.label :reference %>
     <%= form.text_field :reference, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-1",
-    required: true, disabled: payment.confirmed? %>
+    required: true, disabled: !@editable %>
   </div>
 
   <!-- <div class="my-3">
