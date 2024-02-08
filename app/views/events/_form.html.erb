@@ -52,7 +52,7 @@
               <%= f.time_zone_select(
                 :time_zone,
                 nil,
-                { include_blank: true },
+                { default: current_user.time_zone },
                 { class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" }
               ) %>
             </div>

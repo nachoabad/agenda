@@ -22,8 +22,8 @@ class PaymentsController < ApplicationController
   private
     def set_payment
       @payment = Payment.find(params[:id])
-      redirect_to service_slots_path(event.service) unless current_user == @payment.event.user ||
-                                                           current_user == @payment.service.user 
+      redirect_to service_slots_path(event.service) unless (current_user == @payment.event.user && !@payment.confirmed?) ||
+                                                            current_user == @payment.service.user
     end
 
     def payment_params

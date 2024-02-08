@@ -13,7 +13,7 @@ class TimeZonesTest < ApplicationSystemTestCase
     assert_text "3:00"
 
     click_on "cambiar"
-    
+
     select "(GMT+01:00) Madrid", from: :time_zone
     click_on "Guardar"
 

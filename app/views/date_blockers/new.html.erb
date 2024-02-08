@@ -6,7 +6,7 @@
 
   <div class="text-center">
     <p class="my-6">
-      <strong class="block font-large mb-1"><%= l @date_to_block, format: :long %></strong>
+      <strong class="block font-large mb-1"><%= l(@date_to_block, format: :long).upcase_first %></strong>
     </p>
 
     <%= button_to t(:block_date),

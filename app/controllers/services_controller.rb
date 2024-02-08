@@ -16,6 +16,7 @@ class ServicesController < ApplicationController
   def set_service
     @service = Service.find_by slug: params[:id]
     session[:service_id] = @service.id
+    session[:service_time_zone] = @service.time_zone
 
     locale = @service.locale || I18n.default_locale
     session[:locale] = locale
