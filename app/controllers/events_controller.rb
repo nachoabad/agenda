@@ -106,7 +106,6 @@ class EventsController < ApplicationController
         # user owns event but not service
         EventMailer.with(event: @event, user: @event.service.user)
           .destroyed_email.deliver_later if current_user.owns?(@event) && !current_user.owns?(@event.service)
-        end
       end
 
       redirect_to service_slots_url(@event.service), notice:
