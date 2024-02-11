@@ -22,9 +22,15 @@ class Event < ApplicationRecord
     date.past?
   end
 
+  def destroyable?(user)
+    user.owns?(service) ||
+    (booked? &&
+    (user_date_time(user) - Time.now.in_time_zone(user.time_zone) > 6.hours))
+  end
+
   private
 
   def create_pending_payment
-    create_payment unless blocked? || payment if service.accepts_payments
+    create_payment unless blocked? || payment || !service.accepts_payments
   end
 end

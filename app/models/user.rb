@@ -12,8 +12,8 @@ class User < ApplicationRecord
   # TODO: add custom timezones hash
   before_save :fix_time_zones
 
-  def owns?(service)
-    service.user_id == id
+  def owns?(object)
+    object.user_id == id
   end
 
   private

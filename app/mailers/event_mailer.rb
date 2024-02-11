@@ -12,8 +12,8 @@ class EventMailer < ApplicationMailer
     )
   end
 
-  # EventMailer.with(event: event).confirmation_email.deliver_later
-  def confirmation_email
+  # EventMailer.with(event: event).confirmation_created_email.deliver_later
+  def confirmation_created_email
     @event = params[:event]
     event_datetime = @event.user_date_time(@event.user)
 
@@ -68,10 +68,13 @@ class EventMailer < ApplicationMailer
     )
   end
 
-  # EventMailer.with(event: event).destroyed_email.deliver_later
+  # EventMailer.with(event: event, user: user).destroyed_email.deliver_later
   def destroyed_email
     @event = params[:event]
-    event_datetime = @event.user_date_time(@event.service.user)
+    @user = params[:user]
+    event_datetime = @event.user_date_time(@user)
+    email_destroyer = @user.owns?(@event) ?
+                      @event.service.user.email : @event.user.email
 
     # ical = Icalendar::Calendar.new
     # ical.timezone do |t|
@@ -89,9 +92,9 @@ class EventMailer < ApplicationMailer
     # attachments['event.ics'] = { :mime_type => 'text/calendar', content: ical.to_ical }
 
     mail(
-      to: [@event.service.user.email, @event.user&.email],
-      from: email_address_with_name('info@decktra.com', @event.user.name.titleize),
-      reply_to: @event.user&.email || @event.service.user.email,
+      to: @user.email,
+      from: email_address_with_name('info@decktra.com', email_destroyer),
+      reply_to: email_destroyer,
       subject: "Cita anulada #{I18n.l event_datetime, format: :short}"
     )
   end

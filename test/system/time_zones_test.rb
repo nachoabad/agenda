@@ -12,7 +12,7 @@ class TimeZonesTest < ApplicationSystemTestCase
     visit service_slots_path(@service)
     assert_text "3:00"
 
-    click_on "cambiar"
+    click_link "time_zone_changer"
 
     select "(GMT+01:00) Madrid", from: :time_zone
     click_on "Guardar"
@@ -28,7 +28,7 @@ class TimeZonesTest < ApplicationSystemTestCase
     visit service_slots_path(@service)
     assert_text "2:00"
 
-    click_on "cambiar"
+    click_link "time_zone_changer"
     
     select "(GMT+01:00) Madrid", from: :time_zone
     click_on "Guardar"

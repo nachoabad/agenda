@@ -57,8 +57,10 @@ class EventsController < ApplicationController
       end
       notice ||= @event.blocked? ? t(:event_blocked) : t(:event_created)
 
-      EventMailer.with(event: @event).created_email.deliver_later if @event.booked?
-      EventMailer.with(event: @event).confirmation_email.deliver_later if @event.booked? && !@event.user.owns?(@event.service)
+      if @event.booked?
+        EventMailer.with(event: @event).created_email.deliver_later
+        EventMailer.with(event: @event).confirmation_created_email.deliver_later if !@event.user.owns?(@event.service)
+      end
 
       redirect_to event_url(@event), notice:
     else
@@ -96,7 +98,17 @@ class EventsController < ApplicationController
         notice = @event.blocked? ? t(:event_unblocked) : t(:event_canceled)
       end
 
-      # EventMailer.with(event: @event).destroyed_email.deliver_later if @event.booked?
+      if @event.booked?
+        # user owns service but not event
+        EventMailer.with(event: @event, user: @event.user)
+          .destroyed_email.deliver_later if current_user.owns?(@event.service) && !current_user.owns?(@event)
+
+        # user owns event but not service
+        EventMailer.with(event: @event, user: @event.service.user)
+          .destroyed_email.deliver_later if current_user.owns?(@event) && !current_user.owns?(@event.service)
+        end
+      end
+
       redirect_to service_slots_url(@event.service), notice:
     end
   end
