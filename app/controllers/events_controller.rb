@@ -34,16 +34,16 @@ class EventsController < ApplicationController
 
   def create
     # TODO: tidy up fat controller!
-    if params.dig(:event, :user_attributes, :email).presence
+    if email = params.dig(:event, :user_attributes, :email).presence
       @event = Event.new(user_event_params)
 
-      if user = User.find_by(email: params.dig(:event, :user_attributes, :email))
+      if user = User.find_by(email:)
         @event.user = user
       else
         @event.user.password = @event.user.password_confirmation = SecureRandom.hex(6)
       end
     else
-      @event = current_user.events.new(event_params)
+      @event = current_user.events.new(user_event_params)
       @event.name = params.dig(:event, :user_attributes, :name)
     end
 
@@ -65,18 +65,6 @@ class EventsController < ApplicationController
       redirect_to event_url(@event), notice:
     else
       render :new, status: :unprocessable_entity
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to event_url(@event), notice: "Event was successfully updated." }
-        format.json { render :show, status: :ok, location: @event }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
     end
   end
 
@@ -131,7 +119,10 @@ class EventsController < ApplicationController
     end
 
     def user_event_params
-      params.require(:event).permit(:status, :slot_rule_id, :date, :comment, :service_type, user_attributes: [:name, :email, :phone, :time_zone])
+      params.require(:event).permit(
+        :status, :slot_rule_id, :date, :comment, :service_type,
+        user_attributes: [:name, :email, :phone, :time_zone]
+      )
     end
 
     def event_rule_params

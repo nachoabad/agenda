@@ -15,6 +15,7 @@ class EventRule < ApplicationRecord
     slot_rule.date_time(start_date).in_time_zone(user.time_zone)
   end
 
+  # TODO: Move to an recurring events service
   def create_events_from(event, qty: 10)
     event_date = event.date
     event_name = event.name
