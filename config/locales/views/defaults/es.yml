@@ -32,6 +32,7 @@ es:
   new_event: 'Tienes una nueva cita'
   new_slot_rule: 'Crear nuevo horario'
   no_pending_payments: 'No hay pagos pendientes'
+  payments: 'Pagos'
   pending_payments: 'Pagos pendientes'
   reminder_event_with: 'Te recordamos tu cita con'
   reset_password: 'Resetear mi clave'

@@ -32,6 +32,7 @@ en:
   new_event: 'You have a new scheduled event'
   new_slot_rule: 'Create new time slot'
   no_pending_payments: 'No pending payments'
+  payments: 'Payments'
   pending_payments: 'Pending payments'
   reminder_event_with: 'We remind you of your scheduled event with'
   reset_password: 'Reset my password'
