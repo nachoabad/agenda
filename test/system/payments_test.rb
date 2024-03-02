@@ -31,6 +31,7 @@ class PaymentsTest < ApplicationSystemTestCase
 
     visit service_slots_path(@service)
 
+    click_link "main_menu"
     click_on "Mis citas"
     click_on "Reportar pago"
 
@@ -51,8 +52,8 @@ class PaymentsTest < ApplicationSystemTestCase
 
     visit service_slots_path(@service)
 
-    click_on "Mis citas"
-    click_on "Ver pagos"
+    click_link "main_menu"
+    click_on "Pagos pendientes"
 
     assert page.has_css?('.bg-yellow-100', text: "Pago pendiente")
     click_on "Pago pendiente"
@@ -66,7 +67,8 @@ class PaymentsTest < ApplicationSystemTestCase
     assert_text "Pago éxitosamente confirmado"
 
     click_on "Regresar"
-    click_on "Ver pagos"
+    click_link "main_menu"
+    click_on "Pagos pendientes"
 
     assert_no_text "Pago pendiente"
     assert_no_text "Confirmar pago"

@@ -1,37 +1,34 @@
 class SlotRulesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_service
   before_action :set_slot_rule, only: %i[ show edit update destroy ]
 
-  # GET /slot_rules or /slot_rules.json
   def index
-    @slot_rules = SlotRule.all
+    @slot_rules = @service.slot_rules.order(:wday, :time).group_by(&:wday)
   end
 
-  # GET /slot_rules/1 or /slot_rules/1.json
   def show
   end
 
-  # GET /slot_rules/new
   def new
-    @slot_rule = SlotRule.new
+    @slot_rule = @service.slot_rules.new
   end
 
-  # GET /slot_rules/1/edit
   def edit
   end
 
-  # POST /slot_rules or /slot_rules.json
   def create
-    @slot_rule = SlotRule.new(slot_rule_params)
+    wdays = params[:slot_rule]["wdays"].reject! { |x| x == "0" }
+    time = "#{params[:slot_rule][:"time(4i)"]}:#{params[:slot_rule][:"time(5i)"]}"
 
-    respond_to do |format|
-      if @slot_rule.save
-        format.html { redirect_to slot_rule_url(@slot_rule), notice: "Slot rule was successfully created." }
-        format.json { render :show, status: :created, location: @slot_rule }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @slot_rule.errors, status: :unprocessable_entity }
-      end
+    wdays.each do |wday|
+      @slot_rule = @service.slot_rules.create(
+        time: time,
+        wday: wday,
+      )
     end
+
+    redirect_to service_slot_rules_url(@service), notice: "Slot rule was successfully created."
   end
 
   # PATCH/PUT /slot_rules/1 or /slot_rules/1.json
@@ -66,5 +63,9 @@ class SlotRulesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def slot_rule_params
       params.require(:slot_rule).permit(:time, :wday, :user_id)
+    end
+
+    def set_service
+      @service = current_user.services.find params[:service_id]
     end
 end

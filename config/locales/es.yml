@@ -83,6 +83,7 @@ es:
     - jueves
     - viernes
     - sábado
+    - domingo
     formats:
       default: "%a %-d de %b %Y"
       long: "%A %-d de %B de %Y"

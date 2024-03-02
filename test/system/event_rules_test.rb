@@ -31,6 +31,7 @@ class EventRulesTest < ApplicationSystemTestCase
     assert_text @service.name
     assert_no_text "3:00am"
 
+    click_link "main_menu"
     click_on "Mis citas"
     assert_text "Mis citas"
 
@@ -62,6 +63,7 @@ class EventRulesTest < ApplicationSystemTestCase
     click_on "→"
     assert page.has_css?('.bg-green-100', text: "8:00am")
 
+    click_link "main_menu"
     click_on "Mis citas"
     assert_text "Mis citas"
 

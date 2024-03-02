@@ -5,6 +5,8 @@ class SlotRule < ApplicationRecord
 
   enum status: { active: 0, inactive: 1 }
 
+  validates :time, uniqueness: { scope: [:service_id, :wday] }
+
   delegate :time_zone, to: :service
 
   def date_time(date)

@@ -1,0 +1,29 @@
+<div class="w-full text-center">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-xl text-left">Menu</h1>
+    <%= link_to t(:back), service_slots_path(@service), class: "rounded-lg py-3 px-5 bg-gray-100 block font-medium" %>
+  </div>
+
+  <div id="menu" class="flex flex-col items-center justify-center mt-6">
+    <%= link_to service_slots_path(@service),
+      class: "w-64 mt-5 rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" do %>
+        <%= t(:calendar) %>
+    <% end %>
+    <%= link_to service_events_path(@service),
+      class: "w-64 mt-5 rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" do %>
+        <%= t(:my_events) %>
+    <% end %>      
+    <%= link_to t(:my_slot_rules), service_slot_rules_path(@service),
+      class: "w-64 mt-5 rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" if current_user.owns?(@service) %>
+    <%= link_to t(:pending_payments), payments_path,
+      class: "w-64 mt-5 rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" if @service.accepts_payments %>
+    <%= link_to t(:incomes), incomes_path,
+      class: "w-64 mt-5 rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" if @service.accepts_payments %>
+    <%= button_to t(:logout), destroy_user_session_path, method: :delete,
+      class: "w-64 mt-5 rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+</div>

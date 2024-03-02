@@ -23,6 +23,7 @@ class EventsTest < ApplicationSystemTestCase
     click_on "Regresar"
     assert_no_text "10:00am"
 
+    click_link "main_menu"
     click_on "Mis citas"
     assert_text "Mi comentario"
     assert_text "10:00am"
@@ -33,6 +34,7 @@ class EventsTest < ApplicationSystemTestCase
     assert_text "Cita anulada éxitosamente"
     assert_text "10:00am"
 
+    click_link "main_menu"
     click_on "Mis citas"
     assert_no_text "10:00am"
   end
@@ -43,6 +45,7 @@ class EventsTest < ApplicationSystemTestCase
     sign_in users(:admin1)
     visit service_slots_path(@service)
 
+    click_link "main_menu"
     click_on "Mis citas"
     assert_no_text "Cancelar esta cita"
 
@@ -60,6 +63,7 @@ class EventsTest < ApplicationSystemTestCase
     click_on "Regresar"
     assert_no_text "10:00am"
 
+    click_link "main_menu"
     click_on "Mis citas"
     assert_text "10:00am"
 
@@ -71,6 +75,7 @@ class EventsTest < ApplicationSystemTestCase
     assert page.has_css?('.bg-gray-100', text: "8:00am")
     assert page.has_css?('.bg-green-100', text: "3:00pm")
 
+    click_link "main_menu"
     click_on "Mis citas"
     assert_text "3:00pm"
     assert_text users(:user1).name
@@ -87,6 +92,7 @@ class EventsTest < ApplicationSystemTestCase
     visit service_slots_path(@service)
 
     assert_text "10:00am"
+    click_link "main_menu"
     click_on "Mis citas"
     assert_no_text "10:00am"
   end
@@ -114,8 +120,10 @@ class EventsTest < ApplicationSystemTestCase
     sign_out(:user1)
     sign_in users(:admin1)
 
+    click_link "main_menu"
     click_on "Mis citas"
     assert_no_text "CITA BLOQUEADA"
+    click_link "main_menu"
     click_on "Regresar"
 
     click_on "8:00am"
