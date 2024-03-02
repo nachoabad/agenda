@@ -1,15 +1,20 @@
-<div class="mx-auto md:w-1/4 w-full flex">
+<div class="w-full text-center">
   <div class="mx-auto">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="font-bold text-2xl"><%= t(:slot_rule)%></h1>
+      <%= link_to t(:back), service_slot_rules_path(@slot_rule.service), class: "rounded-lg py-3 px-5 bg-gray-100 block font-medium" %>
+    </div>
+
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
 
-    <%= render @slot_rule %>
-
-    <%= link_to 'Edit this slot_rule', edit_slot_rule_path(@slot_rule), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to 'Destroy this slot_rule', slot_rule_path(@slot_rule), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
-    </div>
-    <%= link_to 'Back to slot_rules', slot_rules_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <p class="my-2">
+      <strong class="block font-large mb-1">
+        <%= t('date.day_names')[@slot_rule.wday].upcase_first %>
+        <%= @slot_rule.time %>
+      </strong>
+    </p>
+    <%= render partial: "slot_rules/actions", locals: {slot_rule: @slot_rule} %>
   </div>
 </div>

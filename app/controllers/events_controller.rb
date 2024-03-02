@@ -104,7 +104,7 @@ class EventsController < ApplicationController
 
     def set_event
       @event = Event.find(params[:id])
-      redirect_to service_slots_path(event.service) unless current_user == @event.user ||
+      redirect_to service_slots_path(@event.service) unless current_user == @event.user ||
                                                            current_user == @event.service.user 
     end
 

@@ -1,5 +1,6 @@
 ---
 es:
+  activate: 'Activar'
   add_international_code: 'incluir código internacional'
   back: 'Regresar'
   block_date: 'Bloquear fecha'
@@ -22,6 +23,7 @@ es:
   forgot_password: 'Olvidé mi clave'
   hello: 'Hola'
   hour: 'Hora'
+  inactivate: 'Inactivar'
   incomes: 'Ingresos'
   login: 'Ingresar'
   logout: 'Salir'
@@ -41,6 +43,8 @@ es:
   select_your_time_zone: 'Selecciona tu zona horaria'
   service_type: 'Servicio'
   signup: 'Registrarse'
+  slot_rule: 'Horario'
+  slot_rule_updated: 'Horario actualizado éxitosamente'
   time_slots: 'Horarios'
   time_zone: 'Hora'
   time_zone_saved: 'Zona horario actualizada éxitosamente'

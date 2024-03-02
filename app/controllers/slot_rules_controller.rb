@@ -1,6 +1,6 @@
 class SlotRulesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_service
+  before_action :set_service, except: %i[ show update destroy]
   before_action :set_slot_rule, only: %i[ show edit update destroy ]
 
   def index
@@ -31,36 +31,32 @@ class SlotRulesController < ApplicationController
     redirect_to service_slot_rules_url(@service), notice: "Slot rule was successfully created."
   end
 
-  # PATCH/PUT /slot_rules/1 or /slot_rules/1.json
   def update
-    respond_to do |format|
-      if @slot_rule.update(slot_rule_params)
-        format.html { redirect_to slot_rule_url(@slot_rule), notice: "Slot rule was successfully updated." }
-        format.json { render :show, status: :ok, location: @slot_rule }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @slot_rule.errors, status: :unprocessable_entity }
-      end
+    case params[:status]
+    when "active"
+      @slot_rule.active!
+    when "inactive"
+      @slot_rule.inactive!
     end
+
+    redirect_to service_slot_rules_url(@slot_rule.service), notice: t(:slot_rule_updated)
   end
 
-  # DELETE /slot_rules/1 or /slot_rules/1.json
-  def destroy
-    @slot_rule.destroy
+  # def destroy
+  #   @slot_rule.destroy
 
-    respond_to do |format|
-      format.html { redirect_to slot_rules_url, notice: "Slot rule was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html { redirect_to slot_rules_url, notice: "Slot rule was successfully destroyed." }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_slot_rule
       @slot_rule = SlotRule.find(params[:id])
+      redirect_to service_slot_rules_path(@slot_rule.service) unless current_user.owns?(@slot_rule.service)
     end
 
-    # Only allow a list of trusted parameters through.
     def slot_rule_params
       params.require(:slot_rule).permit(:time, :wday, :user_id)
     end

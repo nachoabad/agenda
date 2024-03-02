@@ -1,5 +1,6 @@
 ---
 en:
+  activate: 'Activate'
   add_international_code: 'add country code'
   back: 'Back'
   block_date: 'Block date'
@@ -22,6 +23,7 @@ en:
   forgot_password: 'Forgot my password'
   hello: 'Hello'
   hour: 'Time'
+  inactivate: 'Inactivate'
   incomes: 'Incomes'
   login: 'Log in'
   logout: 'Log out'
@@ -41,6 +43,8 @@ en:
   select_your_time_zone: 'Select your timezone'
   service_type: 'Service'
   signup: 'Sign up'
+  slot_rule: 'Time slot'
+  slot_rule_updated: 'Time slot successfully updated'
   time_slots: 'Time slots'
   time_zone: 'Timezone'
   time_zone_saved: 'Timezone successfully saved'
