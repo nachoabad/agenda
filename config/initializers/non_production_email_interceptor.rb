@@ -1,8 +1,8 @@
 unless Rails.env.production?
   class NonProductionEmailInterceptor
     def self.delivering_email(email)
-      email.to = [Rails.application.credentials.emails.dev]
       email.subject = "DEV #{email.subject} #{email.to}"
+      email.to = [Rails.application.credentials.emails.dev]
     end
   end
 
