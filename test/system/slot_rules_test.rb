@@ -2,44 +2,62 @@ require "application_system_test_case"
 
 class SlotRulesTest < ApplicationSystemTestCase
   setup do
-    @slot_rule = slot_rules(:one)
+    @service = services(:one)
   end
 
-  # test "visiting the index" do
-  #   visit slot_rules_url
-  #   assert_selector "h1", text: "Slot rules"
-  # end
+  test "admin can activate and inactivate a slot rule" do
+    sign_in users(:admin1)
+    visit service_slot_rules_url(@service)
+    assert_selector "h1", text: "Horarios"
 
-  # test "should create slot rule" do
-  #   visit slot_rules_url
-  #   click_on "New slot rule"
+    click_on "08:00"
+    click_on "Inactivar"
+    page.driver.browser.switch_to.alert.accept
+    assert page.has_css?('.bg-red-100', text: "8:00")
 
-  #   fill_in "Time", with: @slot_rule.time
-  #   fill_in "User", with: @slot_rule.user_id
-  #   fill_in "wday", with: @slot_rule.wday
-  #   click_on "Create Slot rule"
+    click_on "08:00"
+    click_on "Activar"
+    page.driver.browser.switch_to.alert.accept
+    assert page.has_css?('.bg-gray-100', text: "8:00")
+  end
 
-  #   assert_text "Slot rule was successfully created"
-  #   click_on "Back"
-  # end
+  test "inactive slot rules are not shown to users" do
+    sign_in users(:admin1)
+    visit service_slots_path(@service)
+    assert_text "8:00am"
 
-  # test "should update Slot rule" do
-  #   visit slot_rule_url(@slot_rule)
-  #   click_on "Edit this slot rule", match: :first
+    visit service_slot_rules_url(@service)
+    click_on "08:00"
+    click_on "Inactivar"
+    page.driver.browser.switch_to.alert.accept
 
-  #   fill_in "Time", with: @slot_rule.time
-  #   fill_in "User", with: @slot_rule.user_id
-  #   fill_in "wday", with: @slot_rule.wday
-  #   click_on "Update Slot rule"
+    visit service_slots_path(@service)
+    assert_no_text "8:00am"
 
-  #   assert_text "Slot rule was successfully updated"
-  #   click_on "Back"
-  # end
+    click_on "→"
+    assert_no_text "8:00am"
+  end
 
-  # test "should destroy Slot rule" do
-  #   visit slot_rule_url(@slot_rule)
-  #   click_on "Destroy this slot rule", match: :first
+  test "inactive slot rules with an event are shown to users" do
+    sign_in users(:admin1)
+    visit service_slots_path(@service)
+    click_on "8:00am"
+    click_on "Crear cita"
+    fill_in "Nombre y Apellido", with: "User on event name"
+    fill_in "Comentario", with: "Mi comentario"
+    select  "Service B", from: "Servicio"
+    click_on "Crear cita"
 
-  #   assert_text "Slot rule was successfully destroyed"
-  # end
+    visit service_slot_rules_url(@service)
+    click_on "08:00"
+    click_on "Inactivar"
+    page.driver.browser.switch_to.alert.accept
+
+    visit service_slots_path(@service)
+    assert_text "User On Event Name"
+    assert_text "8:00am"
+
+    click_on "→"
+    assert_no_text "8:00am"
+  end
 end

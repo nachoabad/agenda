@@ -11,7 +11,7 @@ module Slots
     def build
       dates = @date..(@date + DATES_RANGE)
 
-      slot_rules = @service.slot_rules.active.sort_by(&:time).group_by &:wday    
+      slot_rules = @service.slot_rules.sort_by(&:time).group_by &:wday
       events     = @service.events.where(date: dates)
 
       slots = {}
@@ -27,7 +27,7 @@ module Slots
                 slot_rule,
                 event,
                 date
-              )
+              ) unless !event && slot_rule.inactive?
             end
           end.compact
         else
