@@ -289,6 +289,9 @@
                         <b><%= @event.user.name.titleize %></b> <%= @event.user.email %> <%= @event.user.phone %>
                       <% end %>
                     </h3>
+                    <% if @event.service_type.present? %>
+                      <h3><%= @event.service_type %></h3>
+                    <% end %>
                     <h3>🗓️ <%= l @event.user_date_time(@event.service.user).to_date %></h3>
                     <h3>⏰ <%= @event.user_date_time(@event.service.user).strftime('%l:%M%P') %> <%= @event.service.user.time_zone %></h3>
             			</div>

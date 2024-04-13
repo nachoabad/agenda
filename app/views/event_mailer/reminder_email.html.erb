@@ -282,6 +282,9 @@
             			<div class="text">
                     <h3><%= t(:hello) %> <%= @event.user.name.split.first.titleize %>,</h3>
                     <h3><%= t(:reminder_event_with) %> <%= @event.service.name %>.</h3>
+                    <% if @event.service_type.present? %>
+                      <h3><%= @event.service_type %></h3>
+                    <% end %>
                     <h3>🗓️ <%= l @event.user_date_time(@event.user).to_date %></h3>
                     <h3>⏰ <%= @event.user_date_time(@event.user).strftime('%l:%M%P') %> <%= @event.user.time_zone %></h3>
             			</div>
