@@ -36,6 +36,9 @@ en:
         comment: 'Comment'
         date: 'Date'
         service_type: 'Service'
+      slot_rule:
+        short_note: 'Calendar note'
+        long_note: 'Event note'
       user:
         email: Email
         name: Name

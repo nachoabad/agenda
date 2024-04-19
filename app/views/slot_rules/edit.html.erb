@@ -1,8 +1,32 @@
-<div class="mx-auto md:w-1/4 w-full">
-  <h1 class="font-bold text-4xl">Editing slot rule</h1>
+<div class="w-full text-center">
+  <div class="mx-auto">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="font-bold text-2xl"><%= t(:slot_rule)%></h1>
+      <%= link_to t(:back), service_slot_rules_path(@slot_rule.service), class: "rounded-lg py-3 px-5 bg-gray-100 block font-medium" %>
+    </div>
 
-  <%= render "form", slot_rule: @slot_rule %>
+    <% if notice.present? %>
+      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <% end %>
 
-  <%= link_to "Show this slot rule", @slot_rule, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  <%= link_to "Back to slot rules", slot_rules_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <div class="flex flex-col justify-center items-center">
+      <%= form_with(model: @slot_rule, class: "contents") do |form| %>
+        <div class="my-2">
+          <%= form.label :short_note %>
+          <%= form.text_field :short_note, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-1" %>
+        </div>
+        <div class="my-2">
+          <%= form.label :long_note %>
+          <%= form.text_field :long_note, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-1" %>
+        </div>
+        <div class="my-2">
+          <%= form.check_box :status, { class: "my-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600" }, "active", "inactive" %>
+          <%= t('active') %>
+        </div>
+        <div class="inline">
+          <%= form.submit t(:save), class: "w-full my-5 rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

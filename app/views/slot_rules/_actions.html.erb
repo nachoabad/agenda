@@ -2,13 +2,13 @@
   <% if slot_rule.active? %>
     <%= button_to t(:inactivate),
       slot_rule_path(slot_rule), method: :put,
-      params: { status: :inactive },
+      params: { slot_rule: { status: :inactive }},
       form: { data: { turbo_confirm: t(:confirm_continue) } },
       class: "mt-3 rounded-lg py-3 px-5 bg-red-100 font-medium" %>
   <% else %>
     <%= button_to t(:activate),
       slot_rule_path(slot_rule), method: :put,
-      params: { status: :active },
+      params: { slot_rule: { status: :active }},
       form: { data: { turbo_confirm: t(:confirm_continue) } },
       class: "mt-3 rounded-lg py-3 px-5 bg-green-100 font-medium" %>
   <% end %>

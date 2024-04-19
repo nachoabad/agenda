@@ -7,7 +7,7 @@ class SlotRule < ApplicationRecord
 
   validates :time, uniqueness: { scope: [:service_id, :wday] }
 
-  delegate :time_zone, to: :service
+  delegate :time_zone, :accepts_slot_notes, to: :service
 
   def date_time(date)
     raise ArgumentError.new "Date does not belong to slot rule wday" unless wday == date.wday 

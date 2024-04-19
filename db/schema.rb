@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_06_165823) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_19_201256) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_06_165823) do
     t.string "locale", default: "es"
     t.boolean "accepts_comments", default: false
     t.json "settings", default: {}
+    t.boolean "accepts_slot_notes", default: false
     t.index ["slug"], name: "index_services_on_slug"
     t.index ["user_id"], name: "index_services_on_user_id"
   end

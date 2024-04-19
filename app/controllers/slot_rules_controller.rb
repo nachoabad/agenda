@@ -1,6 +1,6 @@
 class SlotRulesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_service, except: %i[ show update destroy]
+  before_action :set_service, except: %i[ show edit update destroy]
   before_action :set_slot_rule, only: %i[ show edit update destroy ]
 
   def index
@@ -32,14 +32,11 @@ class SlotRulesController < ApplicationController
   end
 
   def update
-    case params[:status]
-    when "active"
-      @slot_rule.active!
-    when "inactive"
-      @slot_rule.inactive!
+    if @slot_rule.update(slot_rule_params)
+      redirect_to service_slot_rules_url(@slot_rule.service), notice: t(:slot_rule_updated)
+    else
+      render :edit, status: :unprocessable_entity
     end
-
-    redirect_to service_slot_rules_url(@slot_rule.service), notice: t(:slot_rule_updated)
   end
 
   # def destroy
@@ -58,7 +55,7 @@ class SlotRulesController < ApplicationController
     end
 
     def slot_rule_params
-      params.require(:slot_rule).permit(:time, :wday, :user_id)
+      params.require(:slot_rule).permit(:short_note, :long_note, :status)
     end
 
     def set_service

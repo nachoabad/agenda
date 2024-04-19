@@ -1,6 +1,7 @@
 ---
 es:
   activate: 'Activar'
+  active: 'Activo'
   add_international_code: 'incluir código internacional'
   back: 'Regresar'
   block_date: 'Bloquear fecha'

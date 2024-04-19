@@ -15,6 +15,9 @@ es:
         currency: Divisa de pago
         date: Fecha de pago
         reference: Referencia de pago
+      slot_rule:
+        short_note: 'Nota calendario'
+        long_note: 'Nota evento'
       user:
         confirmation_sent_at: Confirmación enviada a
         confirmation_token: Código de confirmación

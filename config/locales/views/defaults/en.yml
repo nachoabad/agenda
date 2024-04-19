@@ -1,6 +1,7 @@
 ---
 en:
   activate: 'Activate'
+  active: 'Active'
   add_international_code: 'add country code'
   back: 'Back'
   block_date: 'Block date'

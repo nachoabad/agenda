@@ -1,5 +1,7 @@
-<%= link_to slot_rule_path(
-  slot_rule,
+<%= link_to (
+    slot_rule.accepts_slot_notes ?
+    edit_slot_rule_path(slot_rule) :
+    slot_rule_path(slot_rule)
   ), class: "rounded-lg mt-1 mx-1 py-3 px-5 bg-#{slot_rule_color(slot_rule)}-100 inline-block font-medium" do %>
   <% if slot_rule.short_note.present? %>
     <span class="text-xs"><%= slot_rule.short_note %><br></span>
