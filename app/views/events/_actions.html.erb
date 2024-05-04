@@ -19,7 +19,7 @@
     <%= button_to event.blocked? ? t(:unblock_event) : t(:cancel_event),
         event_path(event), method: :delete,
         form: { data: { turbo_confirm: t(:confirm_continue) } },
-        class: "mt-3 rounded-lg py-3 px-5 bg-red-100 font-medium" if event.destroyable?(current_user) %>
+        class: "mt-3 rounded-lg py-3 px-5 bg-red-100 text-red-700 font-medium" if event.destroyable?(current_user) %>
 
     <% if event.service.accepts_event_rules &&
           event_rule = event.slot_rule.event_rules.find_by(user: event.user) %>
@@ -27,7 +27,7 @@
           event_path(event), method: :delete,
           params: { destroy_event_rule: event_rule.id },
           form: { data: { turbo_confirm: t(:confirm_continue) } },
-          class: "mt-3 rounded-lg py-3 px-5 bg-red-100 font-medium" %>
+          class: "mt-3 rounded-lg py-3 px-5 bg-red-100 text-red-700 font-medium" %>
     <% end %>
   <% end %>
 </div>
