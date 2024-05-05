@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :event_rules
+  resources :event_settings, only: %i[update]
   resources :payments, only: %i[index edit update]
   resources :incomes, only: %i[index show]
   resource :time_zone

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_19_201256) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_04_164002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,6 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_19_201256) do
     t.string "name"
     t.text "comment"
     t.string "service_type"
+    t.json "settings", default: {}
     t.index ["slot_rule_id"], name: "index_events_on_slot_rule_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
