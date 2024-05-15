@@ -3,9 +3,9 @@
   <% if event.service.accepts_payments && event.payment %>
     <% if event&.payment&.pending? %>
       <% if current_user.owns?(event.service) && event.past? %>
-        <%= link_to 'Pago pendiente', edit_payment_path(event.payment),class: "mt-3 rounded-lg py-3 px-5 bg-yellow-100 font-medium" %>
+        <%= link_to 'Pago pendiente', edit_payment_path(event.payment),class: "mt-3 rounded-lg py-3 px-5 bg-yellow-100 text-yellow-700 font-medium" %>
       <% else %>
-        <%= link_to 'Reportar pago', edit_payment_path(event.payment), class: "mt-3 rounded-lg py-3 px-5 bg-green-100  text-green-700 font-medium" %>
+        <%= link_to 'Reportar pago', edit_payment_path(event.payment), class: "mt-3 rounded-lg py-3 px-5 bg-green-100 text-green-700 font-medium" %>
       <% end %>
     
     <% elsif event.payment.reported? && current_user.owns?(event.service) %>  
