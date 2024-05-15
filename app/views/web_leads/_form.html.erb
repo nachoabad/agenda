@@ -1,6 +1,6 @@
 <%= form_with(model: web_lead, class: "contents") do |form| %>
   <% if web_lead.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-700 px-3 py-2 font-medium rounded-lg mt-3">
+    <div id="error_explanation" class="bg-red-100 text-red-700 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(web_lead.errors.count, "error") %> prohibited this web_lead from being saved:</h2>
 
       <ul>
@@ -32,6 +32,6 @@
   </div>
 
   <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-100 text-blue-700 inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>

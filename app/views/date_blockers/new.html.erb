@@ -12,11 +12,11 @@
     <%= button_to t(:block_date),
     service_date_blockers_path(@service, date: @date, date_action: 'block'),
     form: { data: { turbo_confirm: t(:confirm_continue) } },
-    class: "w-full mt-3 rounded-lg py-3 px-5 bg-red-100 font-medium" %>
+    class: "w-full mt-3 rounded-lg py-3 px-5 bg-red-100 text-red-700 font-medium" %>
 
     <%= button_to t(:unblock_date),
     service_date_blockers_path(@service, date: @date, date_action: 'unblock'),
     form: { data: { turbo_confirm: t(:confirm_continue) } },
-    class: "w-full mt-3 rounded-lg py-3 px-5 bg-green-100 font-medium" %>
+    class: "w-full mt-3 rounded-lg py-3 px-5 bg-green-100 text-green-700 font-medium" %>
   </div>
 </div>

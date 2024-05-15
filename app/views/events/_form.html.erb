@@ -5,8 +5,8 @@
         <%= button_to t(:block_event),
           service_events_path,
           params: { event: { slot_rule_id: event.slot_rule_id, date: event.date, status: :blocked } },
-          class: "rounded-lg mt-3 py-3 px-5 bg-red-100 text-black inline-block font-medium cursor-pointer" %>
-        <button data-action="visibility#showTargets" class="rounded-lg mt-3 py-3 px-5 bg-green-100 text-black inline-block font-medium cursor-pointer"><%= t(:create_event) %></button>
+          class: "rounded-lg mt-3 py-3 px-5 bg-red-100 text-red-700 inline-block font-medium cursor-pointer" %>
+        <button data-action="visibility#showTargets" class="rounded-lg mt-3 py-3 px-5 bg-green-100 text-green-700 inline-block font-medium cursor-pointer"><%= t(:create_event) %></button>
       </div>
       
       <div data-visibility-target="showable" hidden>
@@ -15,7 +15,7 @@
             url: [@service, event],
             class: "contents") do |form| %>
           <% if event.errors.any? %>
-            <div id="error_explanation" class="bg-red-50 text-red-700 px-3 py-2 font-medium rounded-lg mt-3">
+            <div id="error_explanation" class="bg-red-100 text-red-700 px-3 py-2 font-medium rounded-lg mt-3">
               <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
               <ul>
@@ -90,7 +90,7 @@
           <% end %>
 
           <div class="inline">
-            <%= form.submit t(:create_event), class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+            <%= form.submit t(:create_event), class: "rounded-lg mt-3 py-3 px-5 bg-blue-100 text-blue-700 inline-block font-medium cursor-pointer" %>
           </div>
         <% end %>
       </div>
@@ -124,7 +124,7 @@
       <% end %>
 
       <div class="inline">
-        <%= form.submit t(:schedule_event), class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+        <%= form.submit t(:schedule_event), class: "rounded-lg mt-3 py-3 px-5 bg-blue-100 text-blue-700 inline-block font-medium cursor-pointer" %>
       </div>
 
     <% end %>
@@ -139,9 +139,9 @@
   <%= button_to "Reservar este horario semanal",
     service_events_path,
     params: { event: { slot_rule_id: event.slot_rule_id, date: event.date, recurrence: :weekly } },
-    class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    class: "rounded-lg mt-3 py-3 px-5 bg-blue-100 text-blue-700 inline-block font-medium cursor-pointer" %>
   <%= button_to "Reservar este horario quincenal",
     service_events_path,
     params: { event: { slot_rule_id: event.slot_rule_id, date: event.date, recurrence: :biweekly } },
-    class: "rounded-lg mt-3 py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    class: "rounded-lg mt-3 py-3 px-5 bg-blue-100 text-blue-700 inline-block font-medium cursor-pointer" %>
 <% end %>

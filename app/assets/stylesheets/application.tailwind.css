@@ -11,3 +11,9 @@
 }
 
 */
+
+@layer base {
+  html {
+    @apply text-gray-700;
+  }
+}
