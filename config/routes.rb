@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'tasks/date_events_reminder_emails'
+  get 'tasks/event_rules_future_events'
 
   get '/google_redirect', to: 'google#redirect', as: 'google_redirect'
   get '/google_callback', to: 'google#callback', as: 'google_callback'
