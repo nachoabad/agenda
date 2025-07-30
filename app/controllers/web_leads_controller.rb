@@ -25,7 +25,7 @@ class WebLeadsController < ApplicationController
 
     respond_to do |format|
       if @web_lead.save
-        WebLeadMailer.with(web_lead: @web_lead).notify_email.deliver_later
+        # WebLeadMailer.with(web_lead: @web_lead).notify_email.deliver_later
         format.html { redirect_to thanks_url(name: @web_lead.name) }
       else
         format.html { render :new, status: :unprocessable_entity }

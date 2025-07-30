@@ -156,6 +156,11 @@ GEM
       net-imap
       net-pop
       net-smtp
+    mailjet (1.8.1)
+      activesupport (>= 5.0.0)
+      faraday (~> 2.1)
+      rack (>= 1.4.0)
+      yajl-ruby
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
@@ -282,6 +287,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    yajl-ruby (1.4.3)
     zeitwerk (2.6.11)
 
 PLATFORMS
@@ -298,6 +304,7 @@ DEPENDENCIES
   icalendar
   importmap-rails
   jbuilder
+  mailjet
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
