@@ -6,7 +6,7 @@ class EventMailer < ApplicationMailer
     
     mail(
       to: @event.user.email,
-      from: email_address_with_name('', @event.service.user.name),
+      from: email_address_with_name('no-reply@citas.cc', @event.service.user.name),
       reply_to: @event.service.user.email,
       subject: "🔔 Recordatorio Cita #{@event.service.name}"
     )
@@ -34,7 +34,7 @@ class EventMailer < ApplicationMailer
 
     mail(
       to: @event.user.email,
-      from: email_address_with_name('', @event.service.user.name.titleize),
+      from: email_address_with_name('no-reply@citas.cc', @event.service.user.name.titleize),
       reply_to: @event.service.user.email,
       subject: "Confirmación cita #{I18n.l event_datetime, format: :short}"
     )
@@ -62,7 +62,7 @@ class EventMailer < ApplicationMailer
 
     mail(
       to: @event.service.user.email,
-      from: email_address_with_name('', @event.user.name.titleize),
+      from: email_address_with_name('no-reply@citas.cc', @event.user.name.titleize),
       reply_to: @event.user&.email || @event.service.user.email,
       subject: "Nueva cita #{I18n.l event_datetime, format: :short}"
     )
@@ -93,7 +93,7 @@ class EventMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      from: email_address_with_name('', email_destroyer),
+      from: email_address_with_name('no-reply@citas.cc', email_destroyer),
       reply_to: email_destroyer,
       subject: "Cita anulada #{I18n.l event_datetime, format: :short}"
     )

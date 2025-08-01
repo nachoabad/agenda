@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  # default from: "info@decktra.com"
+  default from: "no-reply@citas.cc"
   layout "mailer"
 end
