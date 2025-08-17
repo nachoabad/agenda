@@ -1,6 +1,11 @@
 require "test_helper"
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @service = services(:one)
+    sign_in users(:user1)
+  end
+
   test "should get date_events_reminder_emails" do
     get tasks_date_events_reminder_emails_url
     assert_response :success

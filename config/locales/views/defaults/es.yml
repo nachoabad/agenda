@@ -51,3 +51,5 @@ es:
   time_zone_saved: 'Zona horario actualizada éxitosamente'
   unblock_date: 'Desbloquear fecha'
   unblock_event: 'Desbloquear esta cita'
+  send_reminders: 'Enviar Recordatorios'
+  no_permission: 'No tienes permisos para realizar esta acción'

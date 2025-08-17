@@ -48,6 +48,14 @@
         <span><%= t(:my_slot_rules) %></span>
     <% end if current_user.owns?(@service) %>
 
+    <%= button_to service_reminders_path(@service), method: :post,
+      class: "flex items-center justify-center space-x-2 w-64 mt-5 rounded-lg py-3 px-5 bg-blue-100 text-blue-700 inline-block font-medium cursor-pointer" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-5 5v-5Zm0 0V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-5Z" />
+        </svg>
+        <span><%= t(:send_reminders) %></span>
+    <% end if current_user.owns?(@service) %>
+
     <%= button_to destroy_user_session_path, method: :delete,
       class: "flex items-center justify-center space-x-2 w-64 mt-5 rounded-lg py-3 px-5 bg-blue-100 text-blue-700 inline-block font-medium cursor-pointer" do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

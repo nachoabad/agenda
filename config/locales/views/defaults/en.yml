@@ -51,3 +51,5 @@ en:
   time_zone_saved: 'Timezone successfully saved'
   unblock_date: 'Unblock date'
   unblock_event: 'Unblock this event'
+  send_reminders: 'Send Reminders'
+  no_permission: 'You do not have permission to perform this action'
