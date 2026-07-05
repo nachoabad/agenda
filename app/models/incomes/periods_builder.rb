@@ -1,6 +1,6 @@
 module Incomes
   class PeriodsBuilder
-    DATES_RANGE = 12.months
+    DATES_RANGE = 120.months
     
     def initialize(date:, service:, user:)
       @date = date
